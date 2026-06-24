@@ -1,26 +1,222 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   CODIXEN — Design System (Riverborn-inspired)
+   Forest green + lime + frost. Editorial serif display.
+   Alternating dark/light color blocks, grain + dot-grid texture.
+   ============================================================ */
+
+@theme {
+  /* ---- Brand constants (fixed across section themes) ---- */
+  --color-forest: #0a2218;
+  --color-forest-2: #05140d;
+  --color-lime: #d4f53c;
+  --color-lime-2: #c2e62f;
+  --color-frost: #e8f3f0;
+
+  /* ---- Default (light / frost) scoped tokens ---- */
+  --color-ink: #e8f3f0;          /* page background (cool mint frost) */
+  --color-ink-2: #dceae5;        /* elevated / alt strip */
+  --color-surface: #ffffff;      /* card surface */
+  --color-surface-2: #f0f6f3;    /* hover / nested */
+  --color-line: #d0e0d9;         /* hairline borders */
+  --color-line-strong: #b6ccc3;
+
+  --color-fg: #0a2218;           /* primary text (forest) */
+  --color-fg-muted: #44574e;     /* secondary text */
+  --color-fg-subtle: #75867d;    /* tertiary text */
+
+  --color-accent: #0a2218;       /* emphasis text on light */
+
+  /* Brand accent (used by tag chips / hover states) */
+  --color-brand: #234d3e;
+  --color-brand-2: #2c5e4b;
+
+  /* ---- Typography ---- */
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-besley), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* ---- Radius ---- */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.4rem;
+
+  /* ---- Motion ---- */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --breakpoint-3xl: 120rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---- Forest (dark) section scope — overrides tokens for children ---- */
+.theme-forest {
+  --color-ink: #0a2218;
+  --color-ink-2: #05140d;
+  --color-surface: #103024;
+  --color-surface-2: #16402f;
+  --color-line: #1f4634;
+  --color-line-strong: #2c5a47;
+
+  --color-fg: #eaf3ef;
+  --color-fg-muted: #9fb6ab;
+  --color-fg-subtle: #6f877b;
+
+  --color-accent: #d4f53c;
+
+  --color-brand: #d4f53c;
+  --color-brand-2: #b9d94f;
+
+  background-color: var(--color-ink);
+  color: var(--color-fg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-lime);
+    color: var(--color-forest);
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-forest);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-lime);
+    border-radius: 999px;
+    border: 3px solid var(--color-forest);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Section gutter */
+  .container-cdx {
+    width: 100%;
+    max-width: 75rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-cdx {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Big emphasis (hero / CTA) — italic serif with a lime highlighter marker on light */
+  .text-gradient {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-forest);
+    -webkit-text-fill-color: currentColor;
+    background-image: linear-gradient(
+      to bottom,
+      transparent 8%,
+      var(--color-lime) 8%,
+      var(--color-lime) 86%,
+      transparent 86%
+    );
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding-inline: 0.08em;
+  }
+
+  /* On forest sections the marker reads as plain lime italic text */
+  .theme-forest .text-gradient {
+    color: var(--color-lime);
+    background-image: none;
+    padding-inline: 0;
+  }
+
+  /* Heading accent words — editorial serif italic, no marker */
+  .text-gradient-brand {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-accent);
+    -webkit-text-fill-color: currentColor;
+    background: none;
+  }
+
+  /* Glass surface (nav) */
+  .glass {
+    background: color-mix(in oklab, var(--color-ink) 82%, transparent);
+    backdrop-filter: blur(12px) saturate(130%);
+    border: 1px solid var(--color-line);
+  }
+
+  /* Soft radial glow blob (lime) */
+  .glow {
+    background: radial-gradient(circle, var(--color-lime), transparent 70%);
+    filter: blur(40px);
+    opacity: 0.18;
+  }
+}
+
+@layer utilities {
+  /* Dotted grid texture */
+  .bg-dots {
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--color-fg) 14%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+  }
+
+  /* Film grain overlay */
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.32;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  .shadow-brand {
+    box-shadow: 0 18px 40px -22px color-mix(in oklab, var(--color-forest) 60%, transparent);
+  }
+}
+
+/* ---- Keyframe animations ---- */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-22px) translateX(10px); }
+}
+.animate-float-slow {
+  animation: float-slow 14s var(--ease-premium) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

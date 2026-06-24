@@ -1,0 +1,95 @@
+"use client";
+
+import * as React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus } from "lucide-react";
+import { SectionHeading } from "@/components/section-heading";
+import { Reveal } from "@/components/animate";
+import { BookCallButton } from "@/components/book-call-button";
+import { FAQS, TEAM } from "@/lib/content";
+import { cn } from "@/lib/utils";
+
+export function FAQ() {
+  const [open, setOpen] = React.useState<number | null>(0);
+
+  return (
+    <section id="faq" className="relative py-24 md:py-32">
+      <div className="container-cdx grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div className="lg:sticky lg:top-28">
+          <SectionHeading
+            align="left"
+            eyebrow="FAQ"
+            title={
+              <>
+                Have a{" "}
+                <span className="text-gradient">question?</span>
+              </>
+            }
+            description="Everything you need to know about working with CODIXEN."
+          />
+
+          <Reveal className="mt-8 rounded-3xl border border-line bg-surface/50 p-6">
+            <div className="flex items-center gap-3">
+              <span className="grid size-12 place-items-center rounded-full bg-lime font-display text-base font-bold italic text-forest">
+                {TEAM[0].initials}
+              </span>
+              <div>
+                <div className="font-medium text-fg">{TEAM[0].name}</div>
+                <div className="text-sm text-fg-subtle">{TEAM[0].role}</div>
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-fg-muted">
+              &ldquo;I personally make sure every inquiry gets a real answer —
+              not a sales script. Ask me anything.&rdquo;
+            </p>
+            <BookCallButton size="sm" className="mt-5 w-full">
+              Talk to a founder
+            </BookCallButton>
+          </Reveal>
+        </div>
+
+        <Reveal className="divide-y divide-line rounded-3xl border border-line bg-surface/40">
+          {FAQS.map((faq, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={faq.question}>
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                  aria-expanded={isOpen}
+                >
+                  <span className="font-display text-base font-medium md:text-lg">
+                    {faq.question}
+                  </span>
+                  <span
+                    className={cn(
+                      "grid size-8 shrink-0 place-items-center rounded-full border border-line-strong text-fg-muted transition-all duration-300",
+                      isOpen && "rotate-45 border-brand/60 bg-brand/10 text-brand-2"
+                    )}
+                  >
+                    <Plus className="size-4" />
+                  </span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-6 pb-5 text-sm leading-relaxed text-fg-muted md:text-base">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </Reveal>
+      </div>
+    </section>
+  );
+}
