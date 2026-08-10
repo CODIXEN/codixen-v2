@@ -15,7 +15,6 @@ export function StatsBar() {
                   <Counter
                     value={stat.value}
                     suffix={stat.suffix}
-                    decimals={"decimals" in stat ? stat.decimals : 0}
                   />
                 </dt>
                 <dd className="mt-0.5 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg-subtle md:mt-0">

@@ -2,14 +2,11 @@ import {
   Code2,
   Boxes,
   BrainCircuit,
-  Server,
+  Rocket,
   Smartphone,
-  Palette,
-  Plug,
-  Layers,
+  Megaphone,
   Search,
   PenTool,
-  Rocket,
   HeartPulse,
   Landmark,
   ShoppingBag,
@@ -25,7 +22,7 @@ import {
 // Cal.com booking — replace CAL_LINK with your real cal.com event link
 // (format: "username/event-slug", e.g. "codixen/discovery-call").
 export const CAL_NAMESPACE = "discovery";
-export const CAL_LINK = "codixen/discovery-call";
+export const CAL_LINK = "https://cal.com/muhaiminshihab/30min";
 
 export const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -36,11 +33,17 @@ export const NAV_LINKS = [
   { label: "FAQ", href: "#faq" },
 ] as const;
 
-export const STATS = [
-  { value: 120, suffix: "+", label: "Products shipped" },
-  { value: 38, suffix: "M+", label: "Users served" },
-  { value: 99.9, suffix: "%", label: "Uptime delivered", decimals: 1 },
-  { value: 14, suffix: "", label: "Countries served" },
+export type Stat = {
+  value: number;
+  suffix: string;
+  label: string;
+};
+
+export const STATS: Stat[] = [
+  { value: 25, suffix: "+", label: "Projects delivered" },
+  { value: 15, suffix: "+", label: "Clients served" },
+  { value: 5, suffix: "+", label: "Years of experience" },
+  { value: 8, suffix: "+", label: "Countries served" },
 ] as const;
 
 export type Service = {
@@ -73,25 +76,11 @@ export const SERVICES: Service[] = [
     bullets: ["RAG & semantic search", "Agentic workflows", "Custom model integration"],
   },
   {
-    icon: Server,
-    title: "Laravel Development",
+    icon: Rocket,
+    title: "MVP Development",
     description:
-      "Robust, secure backends and APIs powered by Laravel — maintainable codebases your team will love.",
-    bullets: ["REST & GraphQL APIs", "Queue & job systems", "Clean architecture"],
-  },
-  {
-    icon: Layers,
-    title: "Next.js Development",
-    description:
-      "Blazing-fast, SEO-friendly frontends with the App Router, server components, and edge rendering.",
-    bullets: ["App Router & RSC", "Edge performance", "Core Web Vitals tuned"],
-  },
-  {
-    icon: Plug,
-    title: "API Development & Integration",
-    description:
-      "Connect your stack to anything — payments, CRMs, data warehouses, and third-party services.",
-    bullets: ["Secure API design", "Webhooks & events", "Legacy integration"],
+      "Go from idea to a fundable, production-ready MVP fast — with an architecture that won't box you in later.",
+    bullets: ["Rapid prototyping", "Scalable foundations", "Launch in weeks"],
   },
   {
     icon: Smartphone,
@@ -101,11 +90,11 @@ export const SERVICES: Service[] = [
     bullets: ["iOS & Android", "Offline-first", "Push & deep linking"],
   },
   {
-    icon: Palette,
-    title: "UI/UX Design",
+    icon: Megaphone,
+    title: "Digital Marketing",
     description:
-      "Research-driven product design and design systems that convert visitors into loyal customers.",
-    bullets: ["Design systems", "Prototyping", "Conversion-focused UX"],
+      "Data-driven marketing that grows your reach — SEO, performance campaigns, and conversion optimization.",
+    bullets: ["SEO & content", "Paid acquisition", "Conversion optimization"],
   },
 ];
 
@@ -113,47 +102,74 @@ export type Project = {
   name: string;
   category: string;
   summary: string;
-  metric: string;
-  metricLabel: string;
+  image: string;
   tags: string[];
+  url?: string;
 };
 
 export const PROJECTS: Project[] = [
   {
-    name: "Quanta Analytics",
-    category: "SaaS Platform",
+    name: "Nagadhat",
+    category: "Multi-vendor Commerce",
     summary:
-      "A real-time analytics SaaS rebuilt from the ground up — cutting query latency and tripling activation.",
-    metric: "3.4x",
-    metricLabel: "activation rate",
-    tags: ["Next.js", "Laravel", "ClickHouse", "Stripe"],
+      "A full-featured e-commerce platform with POS, multi-vendor marketplace, agent network, and affiliate marketing built in.",
+    image: "/projects/nagadhat.png",
+    tags: ["Laravel", "Livewire", "MySQL", "Tailwind"],
+    url: "https://nagadhat.com.bd",
   },
   {
-    name: "Lumen AI",
-    category: "AI Product",
+    name: "System Builder",
+    category: "E-commerce",
     summary:
-      "An AI knowledge assistant with RAG over 2M+ documents, deployed to enterprise teams worldwide.",
-    metric: "92%",
-    metricLabel: "answer accuracy",
-    tags: ["Next.js", "Python", "pgvector", "OpenAI"],
+      "An e-commerce store for tech gadgets and computers, featuring a smart PC Builder with real-time component compatibility.",
+    image: "/projects/systembuilder.png",
+    tags: ["Laravel", "JavaScript", "MySQL", "Bootstrap"],
+    url: "https://systembuilder.com.bd",
   },
   {
-    name: "Vaultive Pay",
-    category: "Fintech",
+    name: "Easy Loan",
+    category: "FinTech",
     summary:
-      "A PCI-compliant payments platform processing millions in volume with bank-grade reliability.",
-    metric: "99.99%",
-    metricLabel: "uptime",
-    tags: ["Laravel", "React", "AWS", "Redis"],
+      "A loan distribution and management platform with dedicated customer and admin panels covering the full loan lifecycle.",
+    image: "/projects/easyloan.png",
+    tags: ["Laravel", "Vue.js", "MySQL", "REST API"],
+    url: "https://easyloanint.com",
+  },
+  // {
+  //   name: "Dealiving",
+  //   category: "Affiliate Blog",
+  //   summary:
+  //     "A content-driven blog delivering expert tips and tricks for buying the right products from Amazon.",
+  //   image: "/projects/dealiving.png",
+  //   tags: ["WordPress", "PHP", "SEO", "MySQL"],
+  //   url: "https://dealiving.com",
+  // },
+  {
+    name: "Rupali Steel",
+    category: "Corporate Website",
+    summary:
+      "A polished business portfolio website for a leading steel manufacturer in Bangladesh, showcasing products and capabilities.",
+    image: "/projects/rupalisteel.png",
+    tags: ["Laravel", "Tailwind", "MySQL", "SEO"],
+    url: "https://rupalisteel.com",
   },
   {
-    name: "Orbital Logistics",
-    category: "Web App",
+    name: "Global Fast Coder",
+    category: "News CMS",
     summary:
-      "A logistics command center with live fleet tracking, route optimization, and predictive ETAs.",
-    metric: "-41%",
-    metricLabel: "fuel costs",
-    tags: ["Next.js", "Node", "Mapbox", "Postgres"],
+      "A news platform CMS built for selling, development, and complete editorial management out of the box.",
+    image: "/projects/globalfastcoder.png",
+    tags: ["Laravel", "Livewire", "MySQL", "Tailwind"],
+    url: "https://globalfastcoder.com",
+  },
+  {
+    name: "Daily Bangladesh Mirror",
+    category: "News Platform",
+    summary:
+      "A news platform for a leading local newspaper in Cumilla District, Bangladesh, with fast publishing and rich media.",
+    image: "/projects/dailybangladeshmirror.png",
+    tags: ["Laravel", "MySQL", "Bootstrap", "jQuery"],
+    url: "https://daily-bangladeshmirror.com",
   },
 ];
 
@@ -247,8 +263,6 @@ export type ClientStory = {
   industry: string;
   service: string;
   initials: string;
-  metric: string;
-  metricLabel: string;
   quote: string;
   author: string;
   role: string;
@@ -260,8 +274,6 @@ export const CLIENT_STORIES: ClientStory[] = [
     industry: "Analytics SaaS",
     service: "SaaS Platform Rebuild",
     initials: "SC",
-    metric: "3.4x",
-    metricLabel: "activation rate",
     quote:
       "CODIXEN shipped our SaaS MVP in six weeks and it just worked. They operate like an in-house team that happens to be world-class — and they cut our query latency by 80% along the way.",
     author: "Sarah Chen",
@@ -272,8 +284,6 @@ export const CLIENT_STORIES: ClientStory[] = [
     industry: "AI Product",
     service: "AI-Powered App Development",
     initials: "MR",
-    metric: "92%",
-    metricLabel: "answer accuracy",
     quote:
       "The AI features they built became our biggest differentiator. They engineered a RAG pipeline over millions of documents — genuinely senior engineers who care about the product, not just the code.",
     author: "Marcus Reid",
@@ -284,8 +294,6 @@ export const CLIENT_STORIES: ClientStory[] = [
     industry: "Fintech",
     service: "Payments Platform Engineering",
     initials: "EN",
-    metric: "99.99%",
-    metricLabel: "uptime",
     quote:
       "Bank-grade reliability and a beautiful UI. CODIXEN sweated the details we didn't even know to ask about, and shipped a PCI-compliant platform that just doesn't go down.",
     author: "Elena Novak",
@@ -296,30 +304,43 @@ export const CLIENT_STORIES: ClientStory[] = [
 export type Founder = {
   name: string;
   role: string;
-  bio: string;
-  initials: string;
+  image: string;
+  bio: string[];
+  highlights: { value: string; label: string }[];
+  skills: string[];
+  socials: { label: string; href: string }[];
 };
 
-export const TEAM: Founder[] = [
-  {
-    name: "Ayaan Malik",
-    role: "Founder & Principal Engineer",
-    bio: "15+ years building products for startups and enterprises. Obsessed with shipping software that scales.",
-    initials: "AM",
-  },
-  {
-    name: "Priya Sharma",
-    role: "Head of Design",
-    bio: "Leads product design and design systems. Turns complex problems into interfaces people love.",
-    initials: "PS",
-  },
-  {
-    name: "Daniel Cole",
-    role: "Lead AI Engineer",
-    bio: "Builds production AI systems — RAG, agents, and LLM infrastructure that actually works.",
-    initials: "DC",
-  },
-];
+export const FOUNDER: Founder = {
+  name: "Md Muhaiminul Islam Shihab",
+  role: "Founder & Principal Engineer",
+  image: "/founder.jpg",
+  bio: [
+    "Hi, I'm Shihab — a software developer with 3+ years of hands-on experience building web apps, SaaS platforms, and e-commerce systems that ship and scale.",
+    "I've delivered production products across FinTech, commerce, and media — from multi-vendor marketplaces to loan management platforms — working end-to-end from architecture to launch. I lead every CODIXEN engagement personally, so you work directly with the engineer building your product.",
+  ],
+  highlights: [
+    { value: "3+", label: "Years experience" },
+    { value: "20+", label: "Products shipped" },
+    { value: "100%", label: "Client ownership of code" },
+  ],
+  skills: [
+    "Laravel",
+    "PHP",
+    "Vue.js",
+    "Next.js",
+    "React",
+    "Livewire",
+    "MySQL",
+    "PostgreSQL",
+    "Tailwind CSS",
+    "AWS",
+  ],
+  socials: [
+    { label: "LinkedIn", href: "https://linkedin.com/in/muhaiminshihab" },
+    { label: "Portfolio", href: "https://muhaiminshihab.github.io" },
+  ],
+};
 
 export type FAQ = {
   question: string;

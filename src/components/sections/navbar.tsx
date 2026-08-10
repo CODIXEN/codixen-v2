@@ -66,7 +66,8 @@ export function Navbar() {
           </div>
 
           <button
-            className="grid size-10 place-items-center rounded-xl border border-line-strong text-fg md:hidden"
+            className="grid size-10 cursor-pointer place-items-center rounded-xl border border-line-strong text-fg md:hidden"
+
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={open}

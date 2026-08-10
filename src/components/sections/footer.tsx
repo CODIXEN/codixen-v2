@@ -24,7 +24,8 @@ export function Footer() {
       <div className="container-cdx py-16">
         <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div>
-            <Logo />
+            <Logo variant="white" />
+
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-fg-muted">
               A product engineering studio building web apps, SaaS platforms,
               and AI systems for teams that ship. Global delivery, senior-only.

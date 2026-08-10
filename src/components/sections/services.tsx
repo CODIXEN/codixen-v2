@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+// import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
+
 import { SERVICES } from "@/lib/content";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -23,7 +24,7 @@ export function Services() {
           description="From the first line of code to a scaled product, CODIXEN covers every layer of modern software."
         />
 
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, i) => {
             const Icon = service.icon;
             return (
@@ -32,7 +33,7 @@ export function Services() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.45, ease: EASE, delay: (i % 4) * 0.06 }}
+                transition={{ duration: 0.45, ease: EASE, delay: (i % 3) * 0.06 }}
                 className="group relative flex min-h-[15rem] flex-col bg-ink p-7 transition-colors duration-300 hover:bg-surface"
               >
                 <div className="flex items-start justify-between">
@@ -62,11 +63,12 @@ export function Services() {
                       </span>
                     ))}
                   </div>
-                  <div className="mt-4 flex items-center gap-1 text-sm font-medium text-brand opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  {/* <div className="mt-4 flex items-center gap-1 text-sm font-medium text-brand opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     Learn more
                     <ArrowUpRight className="size-4" />
-                  </div>
+                  </div> */}
                 </div>
+
               </motion.article>
             );
           })}

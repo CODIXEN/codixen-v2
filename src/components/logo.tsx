@@ -1,14 +1,29 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export function Logo({ className }: { className?: string }) {
+export function Logo({
+  className,
+  iconOnly = false,
+  variant = "black",
+}: {
+  className?: string;
+  iconOnly?: boolean;
+  variant?: "black" | "white";
+}) {
+  const src = iconOnly
+    ? "/iconicon.svg"
+    : variant === "white"
+      ? "/logoicon-white.svg"
+      : "/logoicon-black.svg";
+
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <span className="relative grid size-8 place-items-center rounded-md bg-lime">
-        <span className="font-display text-sm font-bold italic text-forest">C</span>
-      </span>
-      <span className="font-display text-lg font-semibold tracking-tight">
-        CODIXEN
-      </span>
-    </span>
+    <Image
+      src={src}
+      alt="CODIXEN"
+      width={iconOnly ? 32 : 123}
+      height={iconOnly ? 32 : 24}
+      priority
+      className={cn(iconOnly ? "h-8 w-auto" : "h-6 w-auto", className)}
+    />
   );
 }

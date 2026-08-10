@@ -63,11 +63,17 @@ export const metadata: Metadata = {
       "Premium software agency for startups and enterprises. Web apps, SaaS, and AI products engineered to scale.",
   },
   robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    index: false,
+    follow: false,
+    googleBot: { index: false, follow: false },
   },
+
   alternates: { canonical: SITE_URL },
+  icons: {
+    icon: [{ url: "/iconicon.svg", type: "image/svg+xml" }],
+    shortcut: "/iconicon.svg",
+    apple: "/iconicon.svg",
+  },
 };
 
 export const viewport: Viewport = {

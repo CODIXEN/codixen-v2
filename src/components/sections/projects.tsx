@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
@@ -22,57 +23,66 @@ export function Projects() {
           description="Products we've designed, built, and scaled in production — each with the outcome that mattered most."
         />
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((project, i) => (
-            <motion.article
+            <motion.a
               key={project.name}
+              href={project.url ?? "#"}
+              target={project.url ? "_blank" : undefined}
+              rel={project.url ? "noopener noreferrer" : undefined}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, ease: EASE, delay: (i % 2) * 0.08 }}
-              className="group relative flex flex-col rounded-2xl border border-line bg-surface/40 p-8 transition-colors duration-300 hover:border-line-strong hover:bg-surface md:p-9"
+              transition={{ duration: 0.5, ease: EASE, delay: (i % 3) * 0.08 }}
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface/40 transition-colors duration-300 hover:border-line-strong hover:bg-surface"
             >
-              <div className="flex items-start justify-between">
-                <span className="font-mono text-xs uppercase tracking-[0.18em] text-brand-2">
-                  {project.category}
-                </span>
-                <span className="font-mono text-xs tracking-widest text-fg-subtle/70">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+              {/* Screenshot */}
+              <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-ink-2">
+                <Image
+                  src={project.image}
+                  alt={`${project.name} screenshot`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                {/* Hover action */}
+                <div className="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-lime text-forest opacity-0 transition-all duration-300 group-hover:opacity-100">
+                  <ArrowUpRight className="size-4" />
+                </div>
               </div>
 
-              <h3 className="mt-5 font-display text-2xl font-semibold tracking-tight md:text-3xl">
-                {project.name}
-              </h3>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-fg-muted">
-                {project.summary}
-              </p>
-
-              <div className="mt-7 flex items-baseline gap-2.5">
-                <span className="font-display text-5xl font-semibold italic text-brand">
-                  {project.metric}
-                </span>
-                <span className="text-xs uppercase tracking-[0.16em] text-fg-subtle">
-                  {project.metricLabel}
-                </span>
-              </div>
-
-              <div className="mt-7 flex flex-wrap items-center gap-1.5 border-t border-line pt-6">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-md border border-line-strong bg-ink-2/60 px-2.5 py-1 font-mono text-[0.7rem] text-fg-subtle"
-                  >
-                    {tag}
+              {/* Body */}
+              <div className="flex flex-1 flex-col p-6">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-brand-2">
+                    {project.category}
                   </span>
-                ))}
-              </div>
+                  <span className="font-mono text-xs tracking-widest text-fg-subtle/70">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
 
-              <div className="mt-6 flex items-center gap-1.5 text-sm font-medium text-brand opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                View case study
-                <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                <h3 className="mt-3 font-display text-xl font-semibold tracking-tight">
+                  {project.name}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+                  {project.summary}
+                </p>
+
+                <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-5">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md border border-line-strong bg-ink-2/60 px-2.5 py-1 font-mono text-[0.7rem] text-fg-subtle"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </motion.article>
+            </motion.a>
           ))}
         </div>
       </div>

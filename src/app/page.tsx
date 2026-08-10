@@ -7,7 +7,7 @@ import { Projects } from "@/components/sections/projects";
 import { Services } from "@/components/sections/services";
 import { Segments } from "@/components/sections/segments";
 import { ClientStories } from "@/components/sections/client-stories";
-import { Team } from "@/components/sections/team";
+import { Founder } from "@/components/sections/founder";
 import { Industries } from "@/components/sections/industries";
 import { Process } from "@/components/sections/process";
 import { WhyChoose } from "@/components/sections/why-choose";
@@ -75,7 +75,7 @@ export default function Home() {
         <Services />
         <Segments />
         <ClientStories />
-        <Team />
+        <Founder />
         <Industries />
         <Process />
         <WhyChoose />

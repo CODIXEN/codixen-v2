@@ -67,15 +67,6 @@ export function ClientStories() {
                   <div className="font-medium text-fg">{story.author}</div>
                   <div className="text-sm text-fg-subtle">{story.role}</div>
                 </figcaption>
-
-                <div className="mt-5 flex items-baseline gap-2">
-                  <span className="font-display text-3xl font-semibold italic text-brand">
-                    {story.metric}
-                  </span>
-                  <span className="text-xs uppercase tracking-[0.16em] text-fg-subtle">
-                    {story.metricLabel}
-                  </span>
-                </div>
               </motion.figure>
             </AnimatePresence>
           </div>
@@ -86,7 +77,8 @@ export function ClientStories() {
               type="button"
               onClick={() => paginate(-1)}
               aria-label="Previous story"
-              className="grid size-11 place-items-center rounded-full border border-line-strong text-fg-muted transition-colors hover:border-brand/60 hover:text-brand"
+              className="grid size-11 cursor-pointer place-items-center rounded-full border border-line-strong text-fg-muted transition-colors hover:border-brand/60 hover:text-brand"
+
             >
               <ArrowLeft className="size-4" />
             </button>
@@ -101,9 +93,10 @@ export function ClientStories() {
                   aria-current={i === index}
                   className={
                     i === index
-                      ? "h-2 w-6 rounded-full bg-lime transition-all duration-300"
-                      : "h-2 w-2 rounded-full bg-line-strong transition-all duration-300 hover:bg-fg-subtle"
+                      ? "h-2 w-6 cursor-pointer rounded-full bg-lime transition-all duration-300"
+                      : "h-2 w-2 cursor-pointer rounded-full bg-line-strong transition-all duration-300 hover:bg-fg-subtle"
                   }
+
                 />
               ))}
             </div>
@@ -112,7 +105,8 @@ export function ClientStories() {
               type="button"
               onClick={() => paginate(1)}
               aria-label="Next story"
-              className="grid size-11 place-items-center rounded-full border border-line-strong text-fg-muted transition-colors hover:border-brand/60 hover:text-brand"
+              className="grid size-11 cursor-pointer place-items-center rounded-full border border-line-strong text-fg-muted transition-colors hover:border-brand/60 hover:text-brand"
+
             >
               <ArrowRight className="size-4" />
             </button>

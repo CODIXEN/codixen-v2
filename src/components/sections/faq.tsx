@@ -6,11 +6,20 @@ import { Plus } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/animate";
 import { BookCallButton } from "@/components/book-call-button";
-import { FAQS, TEAM } from "@/lib/content";
+import { FAQS, FOUNDER } from "@/lib/content";
 import { cn } from "@/lib/utils";
+
+const FOUNDER_INITIALS = FOUNDER.name
+  .split(" ")
+  .filter(Boolean)
+  .slice(-2)
+  .map((part) => part[0])
+  .join("")
+  .toUpperCase();
 
 export function FAQ() {
   const [open, setOpen] = React.useState<number | null>(0);
+
 
   return (
     <section id="faq" className="relative py-24 md:py-32">
@@ -31,12 +40,13 @@ export function FAQ() {
           <Reveal className="mt-8 rounded-3xl border border-line bg-surface/50 p-6">
             <div className="flex items-center gap-3">
               <span className="grid size-12 place-items-center rounded-full bg-lime font-display text-base font-bold italic text-forest">
-                {TEAM[0].initials}
+                {FOUNDER_INITIALS}
               </span>
               <div>
-                <div className="font-medium text-fg">{TEAM[0].name}</div>
-                <div className="text-sm text-fg-subtle">{TEAM[0].role}</div>
+                <div className="font-medium text-fg">{FOUNDER.name}</div>
+                <div className="text-sm text-fg-subtle">{FOUNDER.role}</div>
               </div>
+
             </div>
             <p className="mt-4 text-sm leading-relaxed text-fg-muted">
               &ldquo;I personally make sure every inquiry gets a real answer —
@@ -55,7 +65,8 @@ export function FAQ() {
               <div key={faq.question}>
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                  className="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left"
+
                   aria-expanded={isOpen}
                 >
                   <span className="font-display text-base font-medium md:text-lg">
