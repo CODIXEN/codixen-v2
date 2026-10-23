@@ -1,5 +1,5 @@
 import { Sparkle } from "lucide-react";
-import { FOUNDER } from "@/lib/content";
+import { STACK } from "@/lib/content";
 
 function Row({ hidden = false }: { hidden?: boolean }) {
   return (
@@ -7,7 +7,7 @@ function Row({ hidden = false }: { hidden?: boolean }) {
       aria-hidden={hidden || undefined}
       className="flex shrink-0 items-center gap-10 pr-10"
     >
-      {FOUNDER.skills.map((skill) => (
+      {STACK.map((skill) => (
         <li
           key={skill}
           className="flex items-center gap-10 font-display text-2xl font-medium italic tracking-tight text-fg-subtle transition-colors hover:text-fg md:text-3xl"

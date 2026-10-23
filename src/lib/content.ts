@@ -304,43 +304,26 @@ export const CLIENT_STORIES: ClientStory[] = [
 export type Founder = {
   name: string;
   role: string;
-  image: string;
-  bio: string[];
-  highlights: { value: string; label: string }[];
-  skills: string[];
-  socials: { label: string; href: string }[];
 };
 
 export const FOUNDER: Founder = {
-  name: "Md Muhaiminul Islam Shihab",
-  role: "Founder & Principal Engineer",
-  image: "/founder.jpg",
-  bio: [
-    "Hi, I'm Shihab — a software developer with 3+ years of hands-on experience building web apps, SaaS platforms, and e-commerce systems that ship and scale.",
-    "I've delivered production products across FinTech, commerce, and media — from multi-vendor marketplaces to loan management platforms — working end-to-end from architecture to launch. I lead every CODIXEN engagement personally, so you work directly with the engineer building your product.",
-  ],
-  highlights: [
-    { value: "3+", label: "Years experience" },
-    { value: "20+", label: "Products shipped" },
-    { value: "100%", label: "Client ownership of code" },
-  ],
-  skills: [
-    "Laravel",
-    "PHP",
-    "Vue.js",
-    "Next.js",
-    "React",
-    "Livewire",
-    "MySQL",
-    "PostgreSQL",
-    "Tailwind CSS",
-    "AWS",
-  ],
-  socials: [
-    { label: "LinkedIn", href: "https://linkedin.com/in/muhaiminshihab" },
-    { label: "Portfolio", href: "https://muhaiminshihab.github.io" },
-  ],
+  name: "Maria Islam",
+  role: "Founder, CODIXEN",
 };
+
+// Production stack shown in the tech marquee.
+export const STACK = [
+  "Laravel",
+  "PHP",
+  "Vue.js",
+  "Next.js",
+  "React",
+  "Livewire",
+  "MySQL",
+  "PostgreSQL",
+  "Tailwind CSS",
+  "AWS",
+];
 
 export type FAQ = {
   question: string;

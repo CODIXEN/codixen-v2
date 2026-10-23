@@ -9,7 +9,6 @@ import { Services } from "@/components/sections/services";
 import { Segments } from "@/components/sections/segments";
 // Hidden until real testimonials are in — restore with <ClientStories /> below.
 // import { ClientStories } from "@/components/sections/client-stories";
-import { Founder } from "@/components/sections/founder";
 import { Industries } from "@/components/sections/industries";
 import { Process } from "@/components/sections/process";
 import { WhyChoose } from "@/components/sections/why-choose";
@@ -34,7 +33,6 @@ const jsonLd = {
         "@type": "Person",
         name: FOUNDER.name,
         jobTitle: FOUNDER.role,
-        sameAs: FOUNDER.socials.map((s) => s.href),
       },
     },
     {
@@ -82,7 +80,6 @@ export default function Home() {
         <Services />
         <Segments />
         {/* <ClientStories /> */}
-        <Founder />
         <Industries />
         <Process />
         <WhyChoose />

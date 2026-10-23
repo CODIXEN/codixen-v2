@@ -1,6 +1,6 @@
 import { ArrowUpRight, Mail } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { SERVICES, INDUSTRIES, FOUNDER } from "@/lib/content";
+import { SERVICES, INDUSTRIES } from "@/lib/content";
 
 const COLUMNS = [
   {
@@ -16,7 +16,6 @@ const COLUMNS = [
     links: [
       { label: "About", href: "#about" },
       { label: "Work", href: "#work" },
-      { label: "Founder", href: "#founder" },
       // { label: "Client stories", href: "#stories" }, // hidden until real testimonials
       { label: "Process", href: "#process" },
       { label: "FAQ", href: "#faq" },
@@ -44,21 +43,6 @@ export function Footer() {
               <Mail className="size-4 text-brand" />
               hello@codixen.com
             </a>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {FOUNDER.socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex h-10 items-center gap-1.5 rounded-xl border border-line-strong px-3.5 text-sm text-fg-muted transition-colors hover:border-brand/50 hover:text-fg"
-                >
-                  {social.label}
-                  <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
-              ))}
-            </div>
           </div>
 
           {COLUMNS.map((col) => (
