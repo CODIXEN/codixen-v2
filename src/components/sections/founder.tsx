@@ -40,8 +40,8 @@ export function Founder() {
                 alt={FOUNDER.name}
                 width={600}
                 height={800}
+                sizes="(max-width: 1024px) 24rem, 40vw"
                 className="h-full w-full object-cover"
-                priority
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/70 to-transparent p-5 pt-14">
                 <p className="flex items-center gap-1.5 font-display text-lg font-semibold tracking-tight text-white">

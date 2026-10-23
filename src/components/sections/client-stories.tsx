@@ -35,7 +35,7 @@ export function ClientStories() {
         />
 
         <div className="relative mx-auto mt-14 max-w-3xl">
-          <div className="relative min-h-[24rem] sm:min-h-[22rem]">
+          <div className="relative min-h-[24rem] sm:min-h-[22rem]" aria-live="polite">
             <AnimatePresence mode="wait" custom={dir}>
               <motion.figure
                 key={index}

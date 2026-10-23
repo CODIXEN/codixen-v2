@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Mail } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { BookCallButton } from "@/components/book-call-button";
 
 export function CTA() {
@@ -14,12 +14,12 @@ export function CTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="theme-forest grain relative overflow-hidden rounded-[2rem] border border-line px-6 py-16 text-center md:px-16 md:py-24"
+          className="theme-forest grain beam-border relative overflow-hidden rounded-[2rem] border border-line px-6 py-16 text-center md:px-16 md:py-24"
         >
           {/* background */}
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute inset-0 bg-dots opacity-50 mask-fade-b" />
-            <div className="absolute left-1/2 top-0 size-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full glow" />
+            <div className="absolute left-1/2 top-0 size-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full glow animate-float-slow" />
           </div>
 
           <div className="relative mx-auto max-w-2xl">
@@ -29,17 +29,19 @@ export function CTA() {
             </h2>
 
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <BookCallButton size="lg">
+              <BookCallButton size="lg" className="group">
                 <Calendar className="size-4" />
                 Book a discovery call
-                <ArrowRight className="size-4" />
+                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </BookCallButton>
-              <a href="mailto:hello@codixen.com">
-                <Button size="lg" variant="secondary">
-                  <Mail className="size-4" />
-                  hello@codixen.com
-                </Button>
-              </a>
+              <ButtonLink
+                href="mailto:hello@codixen.com"
+                size="lg"
+                variant="secondary"
+              >
+                <Mail className="size-4" />
+                hello@codixen.com
+              </ButtonLink>
             </div>
 
             <p className="mt-6 font-mono text-xs uppercase tracking-[0.16em] text-fg-subtle">

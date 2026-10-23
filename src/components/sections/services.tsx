@@ -34,10 +34,11 @@ export function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.45, ease: EASE, delay: (i % 3) * 0.06 }}
-                className="group relative flex min-h-[15rem] flex-col bg-ink p-7 transition-colors duration-300 hover:bg-surface"
+                data-spotlight
+                className="group relative flex min-h-[15rem] flex-col bg-ink p-7 hover:bg-surface"
               >
                 <div className="flex items-start justify-between">
-                  <div className="grid size-11 place-items-center rounded-xl bg-lime/15 text-brand transition-transform duration-300 group-hover:scale-105">
+                  <div className="grid size-11 place-items-center rounded-xl bg-lime/15 text-brand transition-transform duration-500 ease-[var(--ease-premium)] group-hover:-rotate-6 group-hover:scale-110">
                     <Icon className="size-5" />
                   </div>
                   <span className="font-mono text-xs tracking-widest text-fg-subtle/70">

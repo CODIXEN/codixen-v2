@@ -35,9 +35,10 @@ export function Industries() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, ease: EASE, delay: (i % 3) * 0.06 }}
-                className="group flex flex-col bg-ink p-7 transition-colors duration-300 hover:bg-surface"
+                data-spotlight
+                className="group flex flex-col bg-ink p-7 hover:bg-surface"
               >
-                <div className="grid size-10 place-items-center rounded-lg bg-lime/15 text-brand transition-transform duration-300 group-hover:scale-105">
+                <div className="grid size-10 place-items-center rounded-lg bg-lime/15 text-brand transition-transform duration-500 ease-[var(--ease-premium)] group-hover:-rotate-6 group-hover:scale-110">
                   <Icon className="size-5" />
                 </div>
                 <h3 className="mt-5 font-display text-base font-semibold tracking-tight transition-colors group-hover:text-brand">

@@ -5,10 +5,12 @@ export function Logo({
   className,
   iconOnly = false,
   variant = "black",
+  priority = false,
 }: {
   className?: string;
   iconOnly?: boolean;
   variant?: "black" | "white";
+  priority?: boolean;
 }) {
   const src = iconOnly
     ? "/iconicon.svg"
@@ -22,7 +24,7 @@ export function Logo({
       alt="CODIXEN"
       width={iconOnly ? 32 : 123}
       height={iconOnly ? 32 : 24}
-      priority
+      priority={priority}
       className={cn(iconOnly ? "h-8 w-auto" : "h-6 w-auto", className)}
     />
   );

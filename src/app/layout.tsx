@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Besley, Schibsted_Grotesk, Geist_Mono } from "next/font/google";
 import { CalProvider } from "@/components/cal-provider";
+import { MotionProvider } from "@/components/motion-provider";
 import "./globals.css";
 
 const besley = Besley({
@@ -63,11 +64,10 @@ export const metadata: Metadata = {
       "Premium software agency for startups and enterprises. Web apps, SaaS, and AI products engineered to scale.",
   },
   robots: {
-    index: false,
-    follow: false,
-    googleBot: { index: false, follow: false },
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
-
   alternates: { canonical: SITE_URL },
   icons: {
     icon: [{ url: "/iconicon.svg", type: "image/svg+xml" }],
@@ -93,8 +93,14 @@ export default function RootLayout({
       className={`${besley.variable} ${schibsted.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ink text-fg">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-lime focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-forest"
+        >
+          Skip to content
+        </a>
         <CalProvider />
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

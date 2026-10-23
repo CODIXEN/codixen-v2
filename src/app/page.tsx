@@ -2,11 +2,13 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { StatsBar } from "@/components/sections/stats-bar";
+import { TechMarquee } from "@/components/sections/tech-marquee";
 import { WhoWeAre } from "@/components/sections/who-we-are";
 import { Projects } from "@/components/sections/projects";
 import { Services } from "@/components/sections/services";
 import { Segments } from "@/components/sections/segments";
-import { ClientStories } from "@/components/sections/client-stories";
+// Hidden until real testimonials are in — restore with <ClientStories /> below.
+// import { ClientStories } from "@/components/sections/client-stories";
 import { Founder } from "@/components/sections/founder";
 import { Industries } from "@/components/sections/industries";
 import { Process } from "@/components/sections/process";
@@ -14,7 +16,7 @@ import { WhyChoose } from "@/components/sections/why-choose";
 import { FAQ } from "@/components/sections/faq";
 import { CTA } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
-import { FAQS, SERVICES } from "@/lib/content";
+import { FAQS, FOUNDER, SERVICES } from "@/lib/content";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -26,15 +28,19 @@ const jsonLd = {
       url: "https://codixen.com",
       description:
         "Premium software development agency building custom web apps, SaaS platforms, and AI-powered products.",
-      sameAs: [
-        "https://twitter.com/codixen",
-        "https://www.linkedin.com/company/codixen",
-      ],
+      email: "hello@codixen.com",
+      logo: "https://codixen.com/iconicon.svg",
+      founder: {
+        "@type": "Person",
+        name: FOUNDER.name,
+        jobTitle: FOUNDER.role,
+        sameAs: FOUNDER.socials.map((s) => s.href),
+      },
     },
     {
       "@type": "ProfessionalService",
       name: "CODIXEN",
-      image: "https://codixen.com/og.png",
+      image: "https://codixen.com/opengraph-image",
       url: "https://codixen.com",
       priceRange: "$$$",
       areaServed: "Worldwide",
@@ -67,14 +73,15 @@ export default function Home() {
       />
       <ScrollProgress />
       <Navbar />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Hero />
         <StatsBar />
+        <TechMarquee />
         <WhoWeAre />
         <Projects />
         <Services />
         <Segments />
-        <ClientStories />
+        {/* <ClientStories /> */}
         <Founder />
         <Industries />
         <Process />

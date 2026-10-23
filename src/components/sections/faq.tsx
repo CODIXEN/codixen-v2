@@ -64,12 +64,14 @@ export function FAQ() {
             return (
               <div key={faq.question}>
                 <button
+                  type="button"
+                  id={`faq-q-${i}`}
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left"
-
+                  className="group flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left"
                   aria-expanded={isOpen}
+                  aria-controls={`faq-a-${i}`}
                 >
-                  <span className="font-display text-base font-medium md:text-lg">
+                  <span className="font-display text-base font-medium transition-colors group-hover:text-brand-2 md:text-lg">
                     {faq.question}
                   </span>
                   <span
@@ -84,6 +86,9 @@ export function FAQ() {
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
+                      id={`faq-a-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-q-${i}`}
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}

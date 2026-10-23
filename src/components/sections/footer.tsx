@@ -1,27 +1,34 @@
-import { Code, Globe, AtSign, ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { SERVICES, INDUSTRIES } from "@/lib/content";
+import { SERVICES, INDUSTRIES, FOUNDER } from "@/lib/content";
 
 const COLUMNS = [
   {
     title: "Capabilities",
-    links: SERVICES.slice(0, 6).map((s) => s.title),
+    links: SERVICES.slice(0, 6).map((s) => ({ label: s.title, href: "#services" })),
   },
   {
     title: "Industries",
-    links: INDUSTRIES.slice(0, 6).map((i) => i.name),
+    links: INDUSTRIES.slice(0, 6).map((i) => ({ label: i.name, href: "#industries" })),
   },
   {
     title: "Company",
-    links: ["About", "Work", "Client stories", "Process", "Careers"],
+    links: [
+      { label: "About", href: "#about" },
+      { label: "Work", href: "#work" },
+      { label: "Founder", href: "#founder" },
+      // { label: "Client stories", href: "#stories" }, // hidden until real testimonials
+      { label: "Process", href: "#process" },
+      { label: "FAQ", href: "#faq" },
+    ],
   },
-] as const;
+];
 
 export function Footer() {
   return (
     <footer className="theme-forest grain relative overflow-hidden border-t border-line">
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-64 bg-gradient-to-t from-forest-2 to-transparent" />
-      <div className="container-cdx py-16">
+      <div className="container-cdx pt-16">
         <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div>
             <Logo variant="white" />
@@ -37,43 +44,42 @@ export function Footer() {
               <Mail className="size-4 text-brand" />
               hello@codixen.com
             </a>
-            <div className="mt-6 flex gap-2">
-              {[
-                { icon: AtSign, label: "X" },
-                { icon: Globe, label: "LinkedIn" },
-                { icon: Code, label: "GitHub" },
-              ].map(({ icon: Icon, label }) => (
+            <div className="mt-6 flex flex-wrap gap-2">
+              {FOUNDER.socials.map((social) => (
                 <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="grid size-10 place-items-center rounded-xl border border-line-strong text-fg-subtle transition-colors hover:border-brand/50 hover:text-fg"
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex h-10 items-center gap-1.5 rounded-xl border border-line-strong px-3.5 text-sm text-fg-muted transition-colors hover:border-brand/50 hover:text-fg"
                 >
-                  <Icon className="size-4" />
+                  {social.label}
+                  <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <span className="sr-only">(opens in a new tab)</span>
                 </a>
               ))}
             </div>
           </div>
 
           {COLUMNS.map((col) => (
-            <div key={col.title}>
+            <nav key={col.title} aria-label={col.title}>
               <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-fg-subtle">
                 {col.title}
               </h3>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
+                  <li key={link.label}>
                     <a
-                      href="#"
+                      href={link.href}
                       className="group inline-flex items-center gap-1 text-sm text-fg-muted transition-colors hover:text-fg"
                     >
-                      {link}
-                      <ArrowUpRight className="size-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
+                      {link.label}
+                      <ArrowUpRight className="size-3.5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           ))}
         </div>
 
@@ -83,6 +89,13 @@ export function Footer() {
             Engineered with care, delivered worldwide.
           </p>
         </div>
+      </div>
+
+      {/* Oversized wordmark */}
+      <div aria-hidden className="pointer-events-none select-none overflow-hidden">
+        <p className="scroll-rise translate-y-[18%] text-center font-display text-[24vw] font-semibold italic leading-[0.8] tracking-[-0.05em] text-transparent [-webkit-text-stroke:1px_color-mix(in_oklab,var(--color-lime)_45%,transparent)] lg:text-[17rem]">
+          codixen
+        </p>
       </div>
     </footer>
   );

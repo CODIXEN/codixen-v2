@@ -8,6 +8,19 @@ import { REGIONS } from "@/lib/content";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+const HOME = { x: 138, y: 92 };
+const NODES: { x: number; y: number; home?: boolean }[] = [
+  { ...HOME, home: true },
+  { x: 52, y: 74 },
+  { x: 96, y: 60 },
+  { x: 116, y: 88 },
+  { x: 160, y: 112 },
+];
+const ARCS = NODES.slice(1).map(
+  (n) =>
+    `M${HOME.x} ${HOME.y} Q${(HOME.x + n.x) / 2} ${Math.min(HOME.y, n.y) - 28} ${n.x} ${n.y}`
+);
+
 export function WhoWeAre() {
   return (
     <section
@@ -47,6 +60,7 @@ export function WhoWeAre() {
         <Reveal className="relative mx-auto grid aspect-square w-full max-w-md place-items-center">
           <div className="absolute inset-0 rounded-full glow opacity-70" />
           <motion.svg
+            aria-hidden
             viewBox="0 0 200 200"
             className="relative w-full text-brand"
             initial={{ opacity: 0, scale: 0.92 }}
@@ -97,7 +111,38 @@ export function WhoWeAre() {
               <line x1="8" y1="100" x2="192" y2="100" />
               <ellipse cx="100" cy="100" rx="92" ry="46" />
             </g>
+
+            {/* Delivery arcs from home base to each region */}
+            <g fill="none" stroke="var(--color-lime)" strokeWidth="1.1" strokeLinecap="round">
+              {ARCS.map((d, i) => (
+                <path
+                  key={d}
+                  d={d}
+                  pathLength={1}
+                  className="globe-arc"
+                  style={{ animationDelay: `${i * 0.7}s` }}
+                />
+              ))}
+            </g>
+            {NODES.map((n, i) => (
+              <g key={`${n.x}-${n.y}`}>
+                <circle
+                  cx={n.x}
+                  cy={n.y}
+                  r="5"
+                  fill="var(--color-lime)"
+                  className="globe-ping"
+                  style={{ animationDelay: `${i * 0.7}s` }}
+                />
+                <circle cx={n.x} cy={n.y} r={n.home ? 3.2 : 2.2} fill="var(--color-lime)" />
+              </g>
+            ))}
           </motion.svg>
+          {/* Slow orbit ring */}
+          <div
+            aria-hidden
+            className="globe-orbit pointer-events-none absolute inset-[-6%] rounded-full border border-dashed border-lime/25"
+          />
         </Reveal>
       </div>
     </section>

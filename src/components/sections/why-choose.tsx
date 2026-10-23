@@ -62,7 +62,8 @@ export function WhyChoose() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.45, ease: EASE, delay: i * 0.08 }}
-                className="rounded-3xl border border-line bg-surface/40 p-7 transition-colors duration-300 hover:bg-surface md:p-8"
+                data-spotlight
+                className="rounded-3xl border border-line bg-surface/40 p-7 hover:bg-surface md:p-8"
               >
                 <h3 className="font-display text-lg font-semibold tracking-tight text-brand">
                   {point.title}

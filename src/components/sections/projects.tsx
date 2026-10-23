@@ -16,11 +16,11 @@ export function Projects() {
           eyebrow="Shipped evidence"
           title={
             <>
-              Featured work, with{" "}
-              <span className="text-gradient">real results</span>
+              Featured work,{" "}
+              <span className="text-gradient">live in production</span>
             </>
           }
-          description="Products we've designed, built, and scaled in production — each with the outcome that mattered most."
+          description="Products we've designed, built, and shipped to production — live, in use, and open for you to explore."
         />
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -34,21 +34,25 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: EASE, delay: (i % 3) * 0.08 }}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface/40 transition-colors duration-300 hover:border-line-strong hover:bg-surface"
+              data-spotlight
+              aria-label={`${project.name} — ${project.category} (opens in a new tab)`}
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface/40 hover:-translate-y-1 hover:border-line-strong hover:bg-surface hover:shadow-brand"
             >
               {/* Screenshot */}
               <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-ink-2">
-                <Image
-                  src={project.image}
-                  alt={`${project.name} screenshot`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
-                />
+                <div className="scroll-zoom absolute inset-0">
+                  <Image
+                    src={project.image}
+                    alt={`${project.name} screenshot`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover object-top transition-transform duration-700 ease-[var(--ease-premium)] group-hover:scale-[1.06]"
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                 {/* Hover action */}
-                <div className="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-lime text-forest opacity-0 transition-all duration-300 group-hover:opacity-100">
+                <div className="absolute right-3 top-3 grid size-9 -translate-y-1 scale-75 place-items-center rounded-full bg-lime text-forest opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:opacity-100">
                   <ArrowUpRight className="size-4" />
                 </div>
               </div>

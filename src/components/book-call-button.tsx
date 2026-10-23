@@ -9,6 +9,7 @@ export function BookCallButton({ children, ...props }: ButtonProps) {
       data-cal-namespace={CAL_NAMESPACE}
       data-cal-link={CAL_LINK}
       data-cal-config='{"layout":"month_view"}'
+      data-magnetic
       {...props}
     >
       {children}

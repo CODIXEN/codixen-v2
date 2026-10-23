@@ -29,7 +29,7 @@ export const NAV_LINKS = [
   { label: "Services", href: "#services" },
   { label: "Work", href: "#work" },
   { label: "Industries", href: "#industries" },
-  { label: "Stories", href: "#stories" },
+  // { label: "Stories", href: "#stories" }, // hidden until real testimonials
   { label: "FAQ", href: "#faq" },
 ] as const;
 
