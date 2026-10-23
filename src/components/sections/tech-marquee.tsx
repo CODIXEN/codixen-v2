@@ -23,7 +23,7 @@ function Row({ hidden = false }: { hidden?: boolean }) {
 export function TechMarquee() {
   return (
     <section aria-label="Technologies we work with" className="py-10 md:py-14">
-      <p className="mb-6 text-center font-mono text-[0.7rem] uppercase tracking-[0.18em] text-fg-subtle">
+      <p className="mb-6 text-center font-mono text-xs uppercase tracking-[0.18em] text-fg-subtle">
         Our production stack
       </p>
       <div className="marquee overflow-hidden">

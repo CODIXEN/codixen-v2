@@ -51,10 +51,10 @@ export function ClientStories() {
                 </span>
 
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-                  <span className="rounded-md border border-lime/25 bg-lime/[0.08] px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-wider text-brand-2">
+                  <span className="rounded-md border border-lime/25 bg-lime/[0.08] px-2.5 py-1 font-mono text-xs uppercase tracking-wider text-brand-2">
                     {story.industry}
                   </span>
-                  <span className="rounded-md border border-line-strong px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-wider text-fg-subtle">
+                  <span className="rounded-md border border-line-strong px-2.5 py-1 font-mono text-xs uppercase tracking-wider text-fg-subtle">
                     {story.service}
                   </span>
                 </div>

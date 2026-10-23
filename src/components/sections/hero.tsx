@@ -71,7 +71,7 @@ export function Hero() {
           <span
             key={chip.label}
             style={{ animationDelay: `${0.9 + i * 0.12}s, ${chip.delay}` }}
-            className={`animate-chip-in absolute rounded-full border border-line-strong bg-surface/70 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg-muted shadow-brand backdrop-blur ${chip.className}`}
+            className={`animate-chip-in absolute rounded-full border border-line-strong bg-surface/70 px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.16em] text-fg-muted shadow-brand backdrop-blur ${chip.className}`}
           >
             <span className="mr-2 inline-block size-1.5 rounded-full bg-lime align-middle" />
             {chip.label}
@@ -99,7 +99,7 @@ export function Hero() {
 
       <div className="container-cdx flex flex-col items-center text-center">
         <span
-          className="animate-rise inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface/60 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-fg-muted backdrop-blur"
+          className="animate-rise inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface/60 px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.18em] text-fg-muted backdrop-blur"
           style={{ animationDelay: "0.05s" }}
         >
           <span className="relative flex size-2">
@@ -159,10 +159,11 @@ export function Hero() {
         </div>
 
         <p
-          className="animate-rise mt-6 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg-subtle"
+          className="animate-rise mt-6 font-mono text-xs uppercase tracking-[0.16em] text-fg-subtle"
           style={{ animationDelay: "0.84s" }}
         >
-          Free 30-min call · You own 100% of the code
+          <span className="whitespace-nowrap">Free 30-min call ·</span>{" "}
+          <span className="whitespace-nowrap">You own 100% of the code</span>
         </p>
       </div>
     </section>

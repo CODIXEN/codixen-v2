@@ -41,7 +41,7 @@ export function Services() {
                   <div className="grid size-11 place-items-center rounded-xl bg-lime/15 text-brand transition-transform duration-500 ease-[var(--ease-premium)] group-hover:-rotate-6 group-hover:scale-110">
                     <Icon className="size-5" />
                   </div>
-                  <span className="font-mono text-xs tracking-widest text-fg-subtle/70">
+                  <span className="font-mono text-xs tracking-widest text-fg-subtle">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -58,7 +58,7 @@ export function Services() {
                     {service.bullets.map((b) => (
                       <span
                         key={b}
-                        className="rounded-md border border-lime/20 bg-lime/[0.08] px-2 py-1 font-mono text-[0.65rem] uppercase tracking-wider text-brand-2"
+                        className="rounded-md border border-lime/20 bg-lime/[0.08] px-2 py-1 font-mono text-xs uppercase tracking-wider text-brand-2"
                       >
                         {b}
                       </span>

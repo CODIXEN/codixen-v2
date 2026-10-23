@@ -47,7 +47,7 @@ export function WhoWeAre() {
             {REGIONS.map((region) => (
               <span
                 key={region}
-                className="inline-flex items-center gap-1.5 rounded-full border border-line-strong bg-surface/50 px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-fg-muted"
+                className="inline-flex items-center gap-1.5 rounded-full border border-line-strong bg-surface/50 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.14em] text-fg-muted"
               >
                 <MapPin className="size-3 text-brand" />
                 {region}

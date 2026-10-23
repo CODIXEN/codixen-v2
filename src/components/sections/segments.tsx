@@ -32,7 +32,7 @@ export function Segments() {
               data-spotlight
               className="group relative flex flex-col rounded-2xl border border-line bg-surface p-7 shadow-[0_4px_16px_-8px_rgba(13,43,34,0.06)] hover:-translate-y-1 hover:border-line-strong"
             >
-              <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-brand-2">
+              <span className="font-mono text-xs uppercase tracking-[0.16em] text-brand-2">
                 {seg.tier}
               </span>
               <h3 className="mt-3 font-display text-xl font-semibold tracking-tight">

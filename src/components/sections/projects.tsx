@@ -63,7 +63,7 @@ export function Projects() {
                   <span className="font-mono text-xs uppercase tracking-[0.18em] text-brand-2">
                     {project.category}
                   </span>
-                  <span className="font-mono text-xs tracking-widest text-fg-subtle/70">
+                  <span className="font-mono text-xs tracking-widest text-fg-subtle">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -79,7 +79,7 @@ export function Projects() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-md border border-line-strong bg-ink-2/60 px-2.5 py-1 font-mono text-[0.7rem] text-fg-subtle"
+                      className="rounded-md border border-line-strong bg-ink-2/60 px-2.5 py-1 font-mono text-xs text-fg-subtle"
                     >
                       {tag}
                     </span>

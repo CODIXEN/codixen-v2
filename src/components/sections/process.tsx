@@ -92,12 +92,12 @@ export function Process() {
                   <div className="grid size-12 place-items-center rounded-xl bg-lime/30 text-forest transition-transform duration-500 ease-[var(--ease-premium)] group-hover:-rotate-6 group-hover:scale-110">
                     <Icon className="size-5" />
                   </div>
-                  <span className="font-display text-5xl font-semibold italic leading-none text-line-strong transition-colors duration-300 group-hover:text-brand-2">
+                  <span aria-hidden className="font-display text-5xl font-semibold italic leading-none text-line-strong transition-colors duration-300 group-hover:text-brand-2">
                     {step.step}
                   </span>
                 </div>
 
-                <span className="mt-6 inline-flex w-fit items-center rounded-md border border-lime/25 bg-lime/[0.12] px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-wider text-brand-2">
+                <span className="mt-6 inline-flex w-fit items-center rounded-md border border-lime/25 bg-lime/[0.12] px-2.5 py-1 font-mono text-xs uppercase tracking-wider text-brand-2">
                   {step.tag}
                 </span>
                 <h3 className="mt-3 font-display text-xl font-semibold tracking-tight">

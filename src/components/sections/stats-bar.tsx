@@ -17,7 +17,7 @@ export function StatsBar() {
                     suffix={stat.suffix}
                   />
                 </dt>
-                <dd className="mt-0.5 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-fg-subtle md:mt-0">
+                <dd className="mt-0.5 font-mono text-xs uppercase tracking-[0.16em] text-fg-subtle md:mt-0">
                   {stat.label}
                 </dd>
               </div>

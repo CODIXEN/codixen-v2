@@ -11,33 +11,33 @@ import { cn } from "@/lib/utils";
 
 const MENU_ID = "mobile-menu";
 
-/** Tracks which nav section is currently in the middle of the viewport. */
+const NAV_HREFS = new Set<string>(NAV_LINKS.map((l) => l.href));
+
+/**
+ * Tracks which nav section is in the middle of the viewport. Every page
+ * section is observed, so scrolling into one without a nav link (Process,
+ * Why, the hero) clears the highlight instead of leaving a stale one.
+ */
 function useActiveSection() {
   const [active, setActive] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const sections = NAV_LINKS.map((l) =>
-      document.querySelector<HTMLElement>(l.href)
-    ).filter((el): el is HTMLElement => el !== null);
+    const sections = document.querySelectorAll<HTMLElement>(
+      "main > section, footer"
+    );
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+          if (!entry.isIntersecting) continue;
+          const href = `#${(entry.target as HTMLElement).id}`;
+          setActive(NAV_HREFS.has(href) ? href : null);
         }
       },
       { rootMargin: "-45% 0px -50% 0px" }
     );
     sections.forEach((s) => observer.observe(s));
-
-    const onTop = () => {
-      if (window.scrollY < 200) setActive(null);
-    };
-    window.addEventListener("scroll", onTop, { passive: true });
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", onTop);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return active;
