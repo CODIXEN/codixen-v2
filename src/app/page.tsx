@@ -1,21 +1,20 @@
 import { ScrollProgress } from "@/components/scroll-progress";
+import { FloatingCTA } from "@/components/floating-cta";
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
-import { StatsBar } from "@/components/sections/stats-bar";
-import { TechMarquee } from "@/components/sections/tech-marquee";
-import { WhoWeAre } from "@/components/sections/who-we-are";
-import { Projects } from "@/components/sections/projects";
+import { Clients } from "@/components/sections/clients";
 import { Services } from "@/components/sections/services";
-import { Segments } from "@/components/sections/segments";
-// Hidden until real testimonials are in — restore with <ClientStories /> below.
-// import { ClientStories } from "@/components/sections/client-stories";
+import { TechStack } from "@/components/sections/tech-stack";
+import { Projects } from "@/components/sections/projects";
 import { Industries } from "@/components/sections/industries";
 import { Process } from "@/components/sections/process";
-import { WhyChoose } from "@/components/sections/why-choose";
+import { About } from "@/components/sections/about";
+// Hidden until real testimonials are in — restore with <ClientStories /> below.
+// import { ClientStories } from "@/components/sections/client-stories";
 import { FAQ } from "@/components/sections/faq";
 import { CTA } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
-import { FAQS, FOUNDER, SERVICES } from "@/lib/content";
+import { FAQS, FOUNDER, SERVICES, SOCIALS } from "@/lib/content";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -29,6 +28,7 @@ const jsonLd = {
         "Premium software development agency building custom web apps, SaaS platforms, and AI-powered products.",
       email: "hello@codixen.com",
       logo: "https://codixen.com/iconicon.svg",
+      sameAs: SOCIALS.map((s) => s.href),
       founder: {
         "@type": "Person",
         name: FOUNDER.name,
@@ -73,20 +73,19 @@ export default function Home() {
       <Navbar />
       <main id="main" className="flex-1">
         <Hero />
-        <StatsBar />
-        <TechMarquee />
-        <WhoWeAre />
-        <Projects />
+        <Clients />
         <Services />
-        <Segments />
-        {/* <ClientStories /> */}
+        <TechStack />
+        <Projects />
         <Industries />
         <Process />
-        <WhyChoose />
+        <About />
+        {/* <ClientStories /> */}
         <FAQ />
         <CTA />
       </main>
       <Footer />
+      <FloatingCTA />
     </>
   );
 }

@@ -16,20 +16,72 @@ import {
   GraduationCap,
   Clapperboard,
   Plane,
+  CreditCard,
+  HandCoins,
+  HardHat,
+  Trophy,
+  Luggage,
+  Car,
+  UtensilsCrossed,
+  Zap,
+  Fuel,
   type LucideIcon,
 } from "lucide-react";
+import {
+  siReact,
+  siNextdotjs,
+  siVuedotjs,
+  siTypescript,
+  siTailwindcss,
+  siJavascript,
+  siLaravel,
+  siPhp,
+  siLivewire,
+  siNodedotjs,
+  siPython,
+  siGraphql,
+  siFlutter,
+  siExpo,
+  siFirebase,
+  siSwift,
+  siKotlin,
+  siAnthropic,
+  siLangchain,
+  siHuggingface,
+  siOllama,
+  siPytorch,
+  siMysql,
+  siPostgresql,
+  siRedis,
+  siMongodb,
+  siSupabase,
+  siPrisma,
+  siDocker,
+  siVercel,
+  siDigitalocean,
+  siGithubactions,
+  siCloudflare,
+  type SimpleIcon,
+} from "simple-icons";
 
 // Cal.com booking — replace CAL_LINK with your real cal.com event link
 // (format: "username/event-slug", e.g. "codixen/discovery-call").
 export const CAL_NAMESPACE = "discovery";
 export const CAL_LINK = "https://cal.com/muhaiminshihab/30min";
 
+// Company social profiles (footer + structured data).
+// TODO: these were guessed — confirm both pages are CODIXEN's before launch.
+export const SOCIALS = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/codixen" },
+  { label: "Facebook", href: "https://www.facebook.com/codixen" },
+] as const;
+
 export const NAV_LINKS = [
-  { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Work", href: "#work" },
   { label: "Industries", href: "#industries" },
-  // { label: "Stories", href: "#stories" }, // hidden until real testimonials
+  { label: "Process", href: "#process" },
+  { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
 ] as const;
 
@@ -97,6 +149,12 @@ export const SERVICES: Service[] = [
     bullets: ["SEO & content", "Paid acquisition", "Conversion optimization"],
   },
 ];
+
+export const HERO_PROOF = [
+  "Free 30-min discovery call",
+  "You own 100% of the code",
+  "Senior engineers only",
+] as const;
 
 export type Project = {
   name: string;
@@ -217,13 +275,22 @@ export type Industry = {
 export const INDUSTRIES: Industry[] = [
   { icon: HeartPulse, name: "Healthcare & Life Sciences", description: "HIPAA-ready platforms, patient portals, and clinical tooling." },
   { icon: Landmark, name: "Financial Services & FinTech", description: "Secure payments, ledgers, and compliant financial products." },
-  { icon: ShoppingBag, name: "E-commerce & Retail", description: "High-converting storefronts and headless commerce at scale." },
+  { icon: CreditCard, name: "Banking & Payments", description: "Digital banking, wallets, and payment gateway integrations." },
+  { icon: HandCoins, name: "Mortgage & Lending", description: "Loan origination, underwriting workflows, and borrower portals." },
+  { icon: ShoppingBag, name: "Retail, E-commerce & FMCG", description: "High-converting storefronts, POS, and distribution systems." },
   { icon: Cloud, name: "SaaS & Technology", description: "Multi-tenant SaaS, admin tooling, and developer platforms." },
-  { icon: Truck, name: "Logistics & Supply Chain", description: "Fleet tracking, routing, and real-time operations dashboards." },
+  { icon: Truck, name: "Logistics & Shipping", description: "Fleet tracking, routing, and real-time operations dashboards." },
   { icon: Building2, name: "Real Estate & PropTech", description: "Listing platforms, CRMs, and property management systems." },
-  { icon: GraduationCap, name: "Education & EdTech", description: "Learning platforms, assessments, and student experiences." },
-  { icon: Clapperboard, name: "Media & Entertainment", description: "Streaming, content tooling, and audience engagement apps." },
-  { icon: Plane, name: "Travel & Hospitality", description: "Booking engines, itineraries, and guest-facing products." },
+  { icon: HardHat, name: "Construction", description: "Project tracking, site reporting, and procurement tools." },
+  { icon: GraduationCap, name: "Education & E-learning", description: "Learning platforms, assessments, and student experiences." },
+  { icon: Clapperboard, name: "Media & Entertainment", description: "News, streaming, content tooling, and audience engagement." },
+  { icon: Trophy, name: "Sports", description: "Fan apps, league management, ticketing, and live scores." },
+  { icon: Luggage, name: "Travel & Hospitality", description: "Booking engines, itineraries, and guest-facing products." },
+  { icon: Plane, name: "Aviation", description: "Crew scheduling, maintenance logs, and passenger services." },
+  { icon: Car, name: "Automotive", description: "Dealer platforms, fleet apps, and service booking systems." },
+  { icon: UtensilsCrossed, name: "Food & Beverage", description: "Ordering, delivery, inventory, and restaurant operations." },
+  { icon: Zap, name: "Energy & Utilities", description: "Metering dashboards, billing, and field-service apps." },
+  { icon: Fuel, name: "Oil & Gas", description: "Asset monitoring, compliance reporting, and supply tracking." },
 ];
 
 export type Segment = {
@@ -311,18 +378,92 @@ export const FOUNDER: Founder = {
   role: "Founder, CODIXEN",
 };
 
-// Production stack shown in the tech marquee.
-export const STACK = [
-  "Laravel",
-  "PHP",
-  "Vue.js",
-  "Next.js",
-  "React",
-  "Livewire",
-  "MySQL",
-  "PostgreSQL",
-  "Tailwind CSS",
-  "AWS",
+export type TechItem = {
+  name: string;
+  /** Short role label shown under the name. */
+  role: string;
+  /** simple-icons brand icon; omitted for brands simple-icons can't ship (e.g. AWS). */
+  icon?: SimpleIcon;
+  /** Brand color used when `icon` is absent. */
+  color?: string;
+};
+
+export type TechCategory = { label: string; description: string; items: TechItem[] };
+
+// Technology stack grouped by tab. Edit freely — keep each list honest.
+export const TECH_STACK: TechCategory[] = [
+  {
+    label: "Frontend",
+    description: "Fast, accessible interfaces built with modern component frameworks.",
+    items: [
+      { name: "React", role: "UI library", icon: siReact },
+      { name: "Next.js", role: "React framework", icon: siNextdotjs },
+      { name: "Vue.js", role: "UI framework", icon: siVuedotjs },
+      { name: "TypeScript", role: "Typed JavaScript", icon: siTypescript },
+      { name: "Tailwind CSS", role: "Styling system", icon: siTailwindcss },
+      { name: "JavaScript", role: "Web language", icon: siJavascript },
+    ],
+  },
+  {
+    label: "Backend",
+    description: "Secure APIs and business logic designed to scale with your users.",
+    items: [
+      { name: "Laravel", role: "PHP framework", icon: siLaravel },
+      { name: "PHP", role: "Server language", icon: siPhp },
+      { name: "Livewire", role: "Reactive UI for Laravel", icon: siLivewire },
+      { name: "Node.js", role: "JavaScript runtime", icon: siNodedotjs },
+      { name: "Python", role: "Scripting & AI", icon: siPython },
+      { name: "GraphQL", role: "API query language", icon: siGraphql },
+    ],
+  },
+  {
+    label: "Mobile",
+    description: "Cross-platform and native apps with offline support and push.",
+    items: [
+      { name: "Flutter", role: "Cross-platform UI", icon: siFlutter },
+      { name: "React Native", role: "Native apps in React", icon: siReact },
+      { name: "Expo", role: "React Native tooling", icon: siExpo },
+      { name: "Firebase", role: "Backend for mobile", icon: siFirebase },
+      { name: "Swift", role: "Native iOS", icon: siSwift },
+      { name: "Kotlin", role: "Native Android", icon: siKotlin },
+    ],
+  },
+  {
+    label: "AI & ML",
+    description: "LLM features, RAG pipelines and agents wired into your product.",
+    items: [
+      { name: "Claude", role: "Large language model", icon: siAnthropic },
+      { name: "LangChain", role: "LLM orchestration", icon: siLangchain },
+      { name: "Hugging Face", role: "Open models", icon: siHuggingface },
+      { name: "Ollama", role: "Self-hosted LLMs", icon: siOllama },
+      { name: "PyTorch", role: "Model training", icon: siPytorch },
+      { name: "Python", role: "ML ecosystem", icon: siPython },
+    ],
+  },
+  {
+    label: "Database",
+    description: "Relational and document stores tuned for reliability and speed.",
+    items: [
+      { name: "MySQL", role: "Relational database", icon: siMysql },
+      { name: "PostgreSQL", role: "Relational database", icon: siPostgresql },
+      { name: "Redis", role: "Cache & queues", icon: siRedis },
+      { name: "MongoDB", role: "Document database", icon: siMongodb },
+      { name: "Supabase", role: "Postgres platform", icon: siSupabase },
+      { name: "Prisma", role: "Type-safe ORM", icon: siPrisma },
+    ],
+  },
+  {
+    label: "Cloud & DevOps",
+    description: "Automated deploys, containers and edge delivery you can trust.",
+    items: [
+      { name: "AWS", role: "Cloud infrastructure", color: "#FF9900" },
+      { name: "Docker", role: "Containers", icon: siDocker },
+      { name: "Vercel", role: "Edge hosting", icon: siVercel },
+      { name: "DigitalOcean", role: "Cloud servers", icon: siDigitalocean },
+      { name: "GitHub Actions", role: "CI/CD", icon: siGithubactions },
+      { name: "Cloudflare", role: "CDN & security", icon: siCloudflare },
+    ],
+  },
 ];
 
 export type FAQ = {

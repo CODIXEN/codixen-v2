@@ -1,52 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Mail } from "lucide-react";
+import { ArrowRight, Mail, Check } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { BookCallButton } from "@/components/book-call-button";
+import { HERO_PROOF } from "@/lib/content";
 
 export function CTA() {
   return (
-    <section id="contact" className="relative py-24 md:py-32">
+    <section id="contact" className="relative py-20 md:py-28">
       <div className="container-cdx">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="theme-forest grain beam-border relative overflow-hidden rounded-[2rem] border border-line px-6 py-16 text-center md:px-16 md:py-24"
+          className="theme-forest beam-border relative overflow-hidden rounded-3xl px-6 py-16 md:px-16 md:py-20"
         >
-          {/* background */}
-          <div className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-0 bg-dots opacity-50 mask-fade-b" />
-            <div className="absolute left-1/2 top-0 size-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full glow animate-float-slow" />
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div className="absolute inset-0 bg-grid mask-radial opacity-60" />
+            <div className="absolute -right-24 -top-32 size-[30rem] rounded-full glow animate-float-slow" />
           </div>
 
-          <div className="relative mx-auto max-w-2xl">
-            <h2 className="font-display text-[2.25rem] font-medium leading-[1.05] tracking-[-0.03em] text-balance sm:text-5xl md:text-6xl">
-              Ready to ship{" "}
-              <span className="text-gradient">production-grade software?</span>
-            </h2>
-
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <BookCallButton size="lg" className="group">
-                <Calendar className="size-4" />
-                Book a discovery call
-                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </BookCallButton>
-              <ButtonLink
-                href="mailto:hello@codixen.com"
-                size="lg"
-                variant="secondary"
-              >
-                <Mail className="size-4" />
-                hello@codixen.com
-              </ButtonLink>
+          <div className="relative grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
+            <div>
+              <h2 className="heading-xl text-[2.5rem] text-balance sm:text-6xl md:text-[4.25rem]">
+                Have a project in mind?{" "}
+                <span className="accent text-lime">Let&rsquo;s build it.</span>
+              </h2>
+              <p className="mt-5 max-w-xl text-lg text-fg-muted">
+                Tell us what you&rsquo;re building. In 30 minutes you&rsquo;ll
+                know the approach, timeline and what it takes to ship.
+              </p>
             </div>
 
-            <p className="mt-6 font-mono text-xs uppercase tracking-[0.16em] text-fg-subtle">
-              Free · 30 minutes · No prep required
-            </p>
+            <div className="rounded-3xl border border-line-strong bg-surface/60 p-6 backdrop-blur md:p-8">
+              <ul className="space-y-3">
+                {HERO_PROOF.map((p) => (
+                  <li key={p} className="flex items-center gap-3 text-fg">
+                    <span className="grid size-6 place-items-center rounded-full bg-lime text-forest">
+                      <Check aria-hidden className="size-3.5" />
+                    </span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-7 flex flex-col gap-3">
+                <BookCallButton size="lg" className="group w-full">
+                  Book a discovery call
+                  <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+                </BookCallButton>
+                <ButtonLink
+                  href="mailto:hello@codixen.com"
+                  size="lg"
+                  variant="outline"
+                  className="w-full"
+                >
+                  <Mail />
+                  hello@codixen.com
+                </ButtonLink>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

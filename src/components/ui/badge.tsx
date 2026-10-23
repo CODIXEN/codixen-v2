@@ -1,6 +1,8 @@
 import * as React from "react";
+import { Sparkle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/** Pill eyebrow shown above section titles. */
 export function Badge({
   children,
   className,
@@ -11,17 +13,8 @@ export function Badge({
   icon?: React.ReactNode;
 }) {
   return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface/50 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.18em] text-fg-muted",
-        className
-      )}
-    >
-      {icon ? (
-        <span className="text-fg">{icon}</span>
-      ) : (
-        <span className="size-1.5 rounded-full bg-lime" />
-      )}
+    <span className={cn("eyebrow", className)}>
+      {icon ?? <Sparkle aria-hidden className="size-3.5 fill-current" />}
       {children}
     </span>
   );

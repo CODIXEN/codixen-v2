@@ -1,21 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Besley, Schibsted_Grotesk, Geist_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Instrument_Serif,
+  Geist,
+  Geist_Mono,
+} from "next/font/google";
 import { CalProvider } from "@/components/cal-provider";
 import { MotionProvider } from "@/components/motion-provider";
 import "./globals.css";
 
-const besley = Besley({
-  variable: "--font-besley",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const instrument = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const schibsted = Schibsted_Grotesk({
-  variable: "--font-schibsted",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -77,7 +87,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#e8f3f0",
+  themeColor: "#0c1a12",
   width: "device-width",
   initialScale: 1,
 };
@@ -90,12 +100,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${besley.variable} ${schibsted.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${instrument.variable} ${geist.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ink text-fg">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-lime focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-forest"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-lime focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-forest"
         >
           Skip to content
         </a>

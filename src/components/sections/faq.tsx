@@ -20,9 +20,8 @@ const FOUNDER_INITIALS = FOUNDER.name
 export function FAQ() {
   const [open, setOpen] = React.useState<number | null>(0);
 
-
   return (
-    <section id="faq" className="relative py-24 md:py-32">
+    <section id="faq" className="relative bg-ink-2 py-24 md:py-32">
       <div className="container-cdx grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
         <div className="lg:sticky lg:top-28">
           <SectionHeading
@@ -30,80 +29,89 @@ export function FAQ() {
             eyebrow="FAQ"
             title={
               <>
-                Have a{" "}
-                <span className="text-gradient">question?</span>
+                Questions, <span className="accent">answered</span>
               </>
             }
             description="Everything you need to know about working with CODIXEN."
           />
 
-          <Reveal className="mt-8 rounded-3xl border border-line bg-surface/50 p-6">
+          <Reveal className="mt-8 rounded-3xl border border-line bg-surface p-6 shadow-soft">
             <div className="flex items-center gap-3">
-              <span className="grid size-12 place-items-center rounded-full bg-lime font-display text-base font-bold italic text-forest">
+              <span className="grid size-12 place-items-center rounded-full bg-forest font-display text-base font-semibold text-lime">
                 {FOUNDER_INITIALS}
               </span>
               <div>
-                <div className="font-medium text-fg">{FOUNDER.name}</div>
+                <div className="font-semibold text-fg">{FOUNDER.name}</div>
                 <div className="text-sm text-fg-subtle">{FOUNDER.role}</div>
               </div>
-
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-fg-muted">
-              &ldquo;I personally make sure every inquiry gets a real answer —
-              not a sales script. Ask me anything.&rdquo;
+            <p className="mt-4 text-[0.9375rem] leading-relaxed text-fg-muted">
+              &ldquo;Every inquiry gets a real answer from a founder — not a
+              sales script. Ask me anything.&rdquo;
             </p>
-            <BookCallButton size="sm" className="mt-5 w-full">
+            <BookCallButton size="sm" variant="dark" className="mt-5 w-full">
               Talk to a founder
             </BookCallButton>
           </Reveal>
         </div>
 
-        <Reveal className="divide-y divide-line rounded-3xl border border-line bg-surface/40">
-          {FAQS.map((faq, i) => {
-            const isOpen = open === i;
-            return (
-              <div key={faq.question}>
-                <button
-                  type="button"
-                  id={`faq-q-${i}`}
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="group flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left"
-                  aria-expanded={isOpen}
-                  aria-controls={`faq-a-${i}`}
-                >
-                  <span className="font-display text-base font-medium transition-colors group-hover:text-brand-2 md:text-lg">
-                    {faq.question}
-                  </span>
-                  <span
-                    className={cn(
-                      "grid size-8 shrink-0 place-items-center rounded-full border border-line-strong text-fg-muted transition-all duration-300",
-                      isOpen && "rotate-45 border-brand/60 bg-brand/10 text-brand-2"
-                    )}
-                  >
-                    <Plus className="size-4" />
-                  </span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      id={`faq-a-${i}`}
-                      role="region"
-                      aria-labelledby={`faq-q-${i}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="px-6 pb-5 text-sm leading-relaxed text-fg-muted md:text-base">
-                        {faq.answer}
-                      </p>
-                    </motion.div>
+        <Reveal>
+          <ul className="space-y-3">
+            {FAQS.map((faq, i) => {
+              const isOpen = open === i;
+              return (
+                <li
+                  key={faq.question}
+                  className={cn(
+                    "rounded-2xl border bg-surface transition-[border-color,box-shadow] duration-300",
+                    isOpen ? "border-line-strong shadow-soft" : "border-line"
                   )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+                >
+                  <button
+                    type="button"
+                    id={`faq-q-${i}`}
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    className="group flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-a-${i}`}
+                  >
+                    <span className="font-display text-lg font-semibold tracking-tight transition-colors group-hover:text-accent">
+                      {faq.question}
+                    </span>
+                    <span
+                      className={cn(
+                        "grid size-9 shrink-0 place-items-center rounded-lg transition-all duration-300",
+                        isOpen ? "bg-forest text-lime" : "bg-surface-2 text-fg"
+                      )}
+                    >
+                      <Plus
+                        aria-hidden
+                        className={cn("size-4 transition-transform duration-300", isOpen && "rotate-45")}
+                      />
+                    </span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={`faq-a-${i}`}
+                        role="region"
+                        aria-labelledby={`faq-q-${i}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-6 pb-6 leading-relaxed text-fg-muted">
+                          {faq.answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </li>
+              );
+            })}
+          </ul>
         </Reveal>
       </div>
     </section>

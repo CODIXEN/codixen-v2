@@ -63,11 +63,10 @@ export function Process() {
     <section ref={ref} id="process" className="relative py-24 md:py-32">
       <div className="container-cdx">
         <SectionHeading
-          eyebrow="How to work with us"
+          eyebrow="How we work"
           title={
             <>
-              A structured path to{" "}
-              <span className="text-gradient">deployment</span>
+              A clear path from idea <span className="accent">to production</span>
             </>
           }
           description="Three clear steps from first conversation to production — transparent, low-risk, and fast."
@@ -86,24 +85,24 @@ export function Process() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, ease: EASE, delay: i * 0.08 }}
                 data-spotlight
-                className="group relative flex flex-col rounded-3xl border border-line bg-surface p-8 shadow-[0_4px_16px_-8px_rgba(13,43,34,0.06)] hover:-translate-y-1 hover:border-line-strong"
+                className="group relative flex flex-col rounded-3xl border border-line bg-surface p-8 shadow-soft hover:-translate-y-1 hover:border-line-strong"
               >
                 <div className="flex items-center justify-between">
-                  <div className="grid size-12 place-items-center rounded-xl bg-lime/30 text-forest transition-transform duration-500 ease-[var(--ease-premium)] group-hover:-rotate-6 group-hover:scale-110">
-                    <Icon className="size-5" />
+                  <div className="grid size-12 place-items-center rounded-xl bg-forest text-lime transition-transform duration-500 ease-[var(--ease-premium)] group-hover:-rotate-6 group-hover:scale-110">
+                    <Icon aria-hidden className="size-5" />
                   </div>
-                  <span aria-hidden className="font-display text-5xl font-semibold italic leading-none text-line-strong transition-colors duration-300 group-hover:text-brand-2">
+                  <span aria-hidden className="font-serif text-6xl italic leading-none text-line-strong transition-colors duration-300 group-hover:text-brand-2">
                     {step.step}
                   </span>
                 </div>
 
-                <span className="mt-6 inline-flex w-fit items-center rounded-md border border-lime/25 bg-lime/[0.12] px-2.5 py-1 font-mono text-xs uppercase tracking-wider text-brand-2">
+                <span className="mt-6 inline-flex w-fit items-center rounded-md bg-lime/35 px-3 py-1 text-xs font-medium text-accent">
                   {step.tag}
                 </span>
-                <h3 className="mt-3 font-display text-xl font-semibold tracking-tight">
+                <h3 className="heading-lg mt-3 text-2xl">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+                <p className="mt-2 leading-relaxed text-fg-muted">
                   {step.description}
                 </p>
               </motion.div>
@@ -112,7 +111,7 @@ export function Process() {
         </div>
 
         <div className="mt-10 flex justify-center">
-          <BookCallButton size="lg" className="group">
+          <BookCallButton size="lg" variant="dark" className="group">
             Book your discovery call
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
           </BookCallButton>

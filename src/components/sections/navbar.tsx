@@ -10,13 +10,12 @@ import { NAV_LINKS } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const MENU_ID = "mobile-menu";
-
 const NAV_HREFS = new Set<string>(NAV_LINKS.map((l) => l.href));
 
 /**
  * Tracks which nav section is in the middle of the viewport. Every page
- * section is observed, so scrolling into one without a nav link (Process,
- * Why, the hero) clears the highlight instead of leaving a stale one.
+ * section is observed, so scrolling into one without a nav link clears the
+ * highlight instead of leaving a stale one.
  */
 function useActiveSection() {
   const [active, setActive] = React.useState<string | null>(null);
@@ -25,7 +24,6 @@ function useActiveSection() {
     const sections = document.querySelectorAll<HTMLElement>(
       "main > section, footer"
     );
-
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -49,7 +47,7 @@ export function Navbar() {
   const active = useActiveSection();
 
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -64,105 +62,108 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Transparent over the light hero; a solid white bar once the page scrolls
+  // (or the mobile menu opens).
+  const solid = scrolled || open;
+
   return (
-    <header className="animate-nav-in fixed inset-x-0 top-0 z-50">
-      <div className="container-cdx pt-3 md:pt-4">
-        <nav
-          aria-label="Primary"
-          className={cn(
-            "flex items-center justify-between gap-4 rounded-2xl px-4 py-2.5 transition-all duration-300 md:px-5",
-            scrolled || open
-              ? "glass shadow-[0_8px_30px_-16px_rgba(11,13,22,0.18)]"
-              : "border border-transparent"
-          )}
-        >
-          <a href="#top" aria-label="CODIXEN home" className="rounded-md">
-            <Logo priority />
-          </a>
+    <header
+      className={cn(
+        "animate-nav-in fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300",
+        solid
+          ? "glass border-b border-line shadow-[0_8px_30px_-20px_rgba(12,26,18,0.25)]"
+          : "border-b border-transparent"
+      )}
+    >
+      <nav
+        aria-label="Primary"
+        className="container-cdx flex h-[4.5rem] items-center justify-between gap-6"
+      >
+        <a href="#top" aria-label="CODIXEN home" className="shrink-0 rounded-md">
+          <Logo priority />
+        </a>
 
-          <ul className="hidden items-center gap-1 md:flex">
-            {NAV_LINKS.map((link) => {
-              const isActive = active === link.href;
-              return (
-                <li key={link.href} className="relative">
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-active"
-                      aria-hidden
-                      className="absolute inset-0 rounded-full bg-surface-2"
-                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                    />
+        <ul className="hidden items-center gap-1 lg:flex">
+          {NAV_LINKS.map((link) => {
+            const isActive = active === link.href;
+            return (
+              <li key={link.href} className="relative">
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-active"
+                    aria-hidden
+                    className="absolute inset-x-3 -bottom-[0.95rem] h-0.5 rounded-full bg-brand-2"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                  />
+                )}
+                <a
+                  href={link.href}
+                  aria-current={isActive ? "location" : undefined}
+                  className={cn(
+                    "relative block rounded-lg px-3.5 py-2 text-[0.9375rem] font-medium transition-colors hover:text-fg",
+                    isActive ? "text-fg" : "text-fg-muted"
                   )}
-                  <a
-                    href={link.href}
-                    aria-current={isActive ? "location" : undefined}
-                    className={cn(
-                      "relative block rounded-full px-3.5 py-2 text-sm transition-colors hover:text-fg",
-                      isActive ? "text-fg" : "text-fg-muted"
-                    )}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
 
-          <div className="hidden items-center gap-2 md:flex">
-            <ButtonLink href="#contact" variant="ghost" size="sm">
-              Contact
-            </ButtonLink>
-            <BookCallButton size="sm" className="group">
-              Book a call
-              <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </BookCallButton>
-          </div>
+        <div className="hidden items-center gap-2 lg:flex">
+          <ButtonLink href="#contact" variant="outline" size="sm" className="h-10 px-5">
+            Contact us
+          </ButtonLink>
+          <BookCallButton size="sm" className="group h-10 px-5">
+            Book a call
+            <ArrowUpRight className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </BookCallButton>
+        </div>
 
-          <button
-            type="button"
-            className="grid size-11 cursor-pointer place-items-center rounded-xl border border-line-strong text-fg md:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            aria-controls={MENU_ID}
+        <button
+          type="button"
+          className="grid size-11 cursor-pointer place-items-center rounded-xl border border-line-strong text-fg lg:hidden"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls={MENU_ID}
+        >
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+        </button>
+      </nav>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id={MENU_ID}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden border-t border-line lg:hidden"
           >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
-        </nav>
-
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              id={MENU_ID}
-              initial={{ opacity: 0, y: -8, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -6, scale: 0.98 }}
-              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-              className="glass mt-2 origin-top overflow-hidden rounded-2xl p-2 md:hidden"
-            >
-              {NAV_LINKS.map((link, i) => (
-                <motion.a
+            <div className="container-cdx flex flex-col gap-1 py-4">
+              {NAV_LINKS.map((link) => (
+                <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.03 * i, duration: 0.25 }}
-                  className="block rounded-xl px-4 py-3 text-base text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg"
+                  className="rounded-xl px-3 py-3 text-base font-medium text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg"
                 >
                   {link.label}
-                </motion.a>
+                </a>
               ))}
               <BookCallButton
-                className="mt-1 w-full"
+                className="mt-2 w-full"
                 onClick={() => setOpen(false)}
               >
                 Book a discovery call
               </BookCallButton>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

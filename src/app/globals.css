@@ -1,72 +1,71 @@
 @import "tailwindcss";
 
 /* ============================================================
-   CODIXEN — Design System (Riverborn-inspired)
-   Forest green + lime + frost. Editorial serif display.
-   Alternating dark/light color blocks, grain + dot-grid texture.
+   CODIXEN — Design System v2 ("clean engineering")
+   White-first pages, deep forest hero/feature bands, lime accent.
+   Display: Bricolage Grotesque + Instrument Serif italic accents.
+   All text tokens pass WCAG AA (≥4.5:1) on their surfaces.
    ============================================================ */
 
 @theme {
-  /* ---- Brand constants (fixed across section themes) ---- */
-  --color-forest: #0a2218;
-  --color-forest-2: #05140d;
+  /* ---- Brand constants ---- */
+  --color-forest: #0c1a12;
+  --color-forest-2: #081209;
   --color-lime: #d4f53c;
-  --color-lime-2: #c2e62f;
-  --color-frost: #e8f3f0;
+  --color-lime-2: #c4e82c;
+  --color-frost: #f5f8f2;
 
-  /* ---- Default (light / frost) scoped tokens ---- */
-  --color-ink: #e8f3f0;          /* page background (cool mint frost) */
-  --color-ink-2: #dceae5;        /* elevated / alt strip */
-  --color-surface: #ffffff;      /* card surface */
-  --color-surface-2: #f0f6f3;    /* hover / nested */
-  --color-line: #d0e0d9;         /* hairline borders */
-  --color-line-strong: #b6ccc3;
+  /* ---- Light (default) scoped tokens ---- */
+  --color-ink: #ffffff;          /* page background */
+  --color-ink-2: #f5f8f2;        /* alt section band */
+  --color-surface: #ffffff;      /* card */
+  --color-surface-2: #eef3ea;    /* hover / nested */
+  --color-line: #e3e9df;
+  --color-line-strong: #cfd8ca;
 
-  --color-fg: #0a2218;           /* primary text (forest) */
-  --color-fg-muted: #44574e;     /* secondary text */
-  --color-fg-subtle: #576a61;    /* tertiary text (≥4.6:1 on light surfaces) */
-
-  --color-accent: #0a2218;       /* emphasis text on light */
-
-  /* Brand accent (used by tag chips / hover states) */
-  --color-brand: #234d3e;
-  --color-brand-2: #2c5e4b;
+  --color-fg: #0c1a12;           /* 17.9:1 */
+  --color-fg-muted: #45534b;     /* 8.1:1 */
+  --color-fg-subtle: #5c6b62;    /* 5.6:1 */
+  --color-accent: #2f6410;       /* green accent text, 7.1:1 */
+  --color-brand: #2f6410;
+  --color-brand-2: #3a7313;
 
   /* ---- Typography ---- */
-  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-besley), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-geist), ui-sans-serif, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  /* ---- Radius ---- */
-  --radius-xl: 1rem;
-  --radius-2xl: 1.4rem;
+  /* Restrained corners: 8 / 10 / 12px. Pills are reserved for true circles. */
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.625rem;
+  --radius-3xl: 0.75rem;
 
-  /* ---- Motion ---- */
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
-
-  --breakpoint-3xl: 120rem;
 }
 
-/* ---- Forest (dark) section scope — overrides tokens for children ---- */
-.theme-forest {
-  --color-ink: #0a2218;
-  --color-ink-2: #05140d;
-  --color-surface: #103024;
-  --color-surface-2: #16402f;
-  --color-line: #1f4634;
-  --color-line-strong: #2c5a47;
+/* ---- Forest (dark) scope — hero, work rail, CTA, footer ----
+   .scope-dark swaps tokens only; .theme-forest also paints the band. */
+.theme-forest,
+.scope-dark {
+  --color-ink: #0c1a12;
+  --color-ink-2: #081209;
+  --color-surface: #13261b;
+  --color-surface-2: #1a3324;
+  --color-line: #22392b;
+  --color-line-strong: #2f4b3a;
 
-  --color-fg: #eaf3ef;
-  --color-fg-muted: #9fb6ab;
-  --color-fg-subtle: #95a89f;    /* ≥4.6:1 on forest surfaces */
-
+  --color-fg: #f1f6ef;           /* 16.4:1 */
+  --color-fg-muted: #aebcb3;     /* 9.1:1 */
+  --color-fg-subtle: #93a399;    /* 6.8:1 */
   --color-accent: #d4f53c;
-
   --color-brand: #d4f53c;
-  --color-brand-2: #b9d94f;
+  --color-brand-2: #c4e82c;
 
-  background-color: var(--color-ink);
   color: var(--color-fg);
+}
+.theme-forest {
+  background-color: var(--color-ink);
 }
 
 @layer base {
@@ -76,6 +75,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -91,128 +91,124 @@
     color: var(--color-forest);
   }
 
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--color-forest);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-lime);
-    border-radius: 999px;
-    border: 3px solid var(--color-forest);
+  :focus-visible {
+    outline: 2px solid var(--color-brand-2);
+    outline-offset: 3px;
   }
 }
 
 @layer components {
-  /* Section gutter */
   .container-cdx {
     width: 100%;
-    max-width: 75rem;
+    max-width: 78rem;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
   @media (min-width: 768px) {
-    .container-cdx {
-      padding-inline: 2rem;
-    }
+    .container-cdx { padding-inline: 2rem; }
   }
 
-  /* Big emphasis (hero / CTA) — italic serif with a lime highlighter marker on light */
-  .text-gradient {
+  /* Display headings */
+  .heading-xl {
     font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 500;
-    color: var(--color-forest);
-    -webkit-text-fill-color: currentColor;
-    /* Starts at 20% so the band on a wrapped line stays clear of the
-       previous line's descenders (headings use ~1.06 line-height). */
-    background-image: linear-gradient(
-      to bottom,
-      transparent 20%,
-      var(--color-lime) 20%,
-      var(--color-lime) 88%,
-      transparent 88%
-    );
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    padding-inline: 0.08em;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    font-variation-settings: "opsz" 96;
+  }
+  .heading-lg {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    font-variation-settings: "opsz" 72;
   }
 
-  /* On forest sections the marker reads as plain lime italic text */
-  .theme-forest .text-gradient {
-    color: var(--color-lime);
-    background-image: none;
-    padding-inline: 0;
-  }
-
-  /* Heading accent words — editorial serif italic, no marker */
+  /* Italic serif accent words inside headings */
+  .accent,
+  .text-gradient,
   .text-gradient-brand {
-    font-family: var(--font-display);
+    font-family: var(--font-serif);
     font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--color-accent);
+  }
+
+  /* Eyebrow chip above section titles */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid color-mix(in oklab, var(--color-brand-2) 35%, transparent);
+    background: color-mix(in oklab, var(--color-lime) 14%, transparent);
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
     font-weight: 500;
     color: var(--color-accent);
-    -webkit-text-fill-color: currentColor;
-    background: none;
   }
 
-  /* Glass surface (nav) */
   .glass {
-    background: color-mix(in oklab, var(--color-ink) 82%, transparent);
-    backdrop-filter: blur(12px) saturate(130%);
-    border: 1px solid var(--color-line);
+    background: color-mix(in oklab, var(--color-ink) 86%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
   }
 
-  /* Soft radial glow blob (lime) */
   .glow {
     background: radial-gradient(circle, var(--color-lime), transparent 70%);
-    filter: blur(40px);
-    opacity: 0.18;
+    filter: blur(48px);
+    opacity: 0.16;
   }
 }
 
 @layer utilities {
-  /* Dotted grid texture */
   .bg-dots {
     background-image: radial-gradient(
-      color-mix(in oklab, var(--color-fg) 14%, transparent) 1px,
+      color-mix(in oklab, var(--color-fg) 16%, transparent) 1px,
       transparent 1px
     );
-    background-size: 24px 24px;
+    background-size: 22px 22px;
   }
 
-  /* Film grain overlay */
-  .grain::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.32;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  /* Blueprint grid lines (hero / feature bands) */
+  .bg-grid {
+    background-image:
+      linear-gradient(color-mix(in oklab, var(--color-fg) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklab, var(--color-fg) 7%, transparent) 1px, transparent 1px);
+    background-size: 64px 64px;
   }
 
   .mask-fade-b {
-    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+  .mask-radial {
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
   }
 
+  .shadow-soft {
+    box-shadow:
+      0 1px 2px rgba(12, 26, 18, 0.04),
+      0 12px 32px -16px rgba(12, 26, 18, 0.14);
+  }
   .shadow-brand {
     box-shadow: 0 18px 40px -22px color-mix(in oklab, var(--color-forest) 60%, transparent);
   }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
 }
 
-/* ---- Keyframe animations ---- */
+/* ============================================================
+   Motion
+   ============================================================ */
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-22px) translateX(10px); }
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10px, -20px); }
 }
-.animate-float-slow {
-  animation: float-slow 14s var(--ease-premium) infinite;
-}
+.animate-float-slow { animation: float-slow 14s var(--ease-premium) infinite; }
 
 /* Page-load entrances — pure CSS so content paints before hydration */
 @keyframes rise {
@@ -224,57 +220,48 @@
   to { transform: none; }
 }
 @keyframes nav-in {
-  from { opacity: 0; transform: translateY(-24px); }
+  from { opacity: 0; transform: translateY(-16px); }
   to { opacity: 1; transform: none; }
 }
-@keyframes marker {
-  from { background-size: 0% 100%; }
-  to { background-size: 100% 100%; }
-}
-@keyframes chip-in {
-  from { opacity: 0; transform: scale(0.8) translateY(12px); }
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(28px) scale(0.96); }
   to { opacity: 1; transform: none; }
 }
-@keyframes chip-float {
+@keyframes bob {
   0%, 100% { translate: 0 0; }
-  50% { translate: 0 -14px; }
+  50% { translate: 0 -10px; }
 }
 @keyframes ping-soft {
   0% { transform: scale(1); opacity: 0.7; }
   80%, 100% { transform: scale(2.6); opacity: 0; }
 }
-@keyframes skyline {
-  from { transform: translateY(40%); }
-  to { transform: none; }
-}
 
 .animate-rise { animation: rise 0.8s var(--ease-premium) both; }
 .animate-word { animation: word-up 0.9s var(--ease-premium) both; }
 .animate-nav-in { animation: nav-in 0.6s var(--ease-premium) both; }
-.marker-sweep { animation: marker 0.9s var(--ease-premium) 0.95s both; }
-.animate-chip-in {
+.animate-card-in {
   animation:
-    chip-in 0.8s var(--ease-premium) both,
-    chip-float 9s ease-in-out infinite;
+    card-in 1s var(--ease-premium) both,
+    bob 7s ease-in-out infinite;
 }
 .animate-ping-soft { animation: ping-soft 2.2s cubic-bezier(0, 0, 0.2, 1) infinite; }
-.animate-skyline { animation: skyline 1.4s var(--ease-premium) 0.2s both; }
 
 /* Infinite marquee — the track holds two identical halves */
 @keyframes marquee {
   to { transform: translateX(-50%); }
 }
-.marquee {
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 45s linear infinite;
+  animation: marquee 40s linear infinite;
 }
-.marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track {
+
+/* "Trusted by" logo wall: stacked marquee rows, wide edge fade */
+.logo-wall {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
+}
+.logo-wall:hover .marquee-track {
   animation-play-state: paused;
 }
 
@@ -286,8 +273,8 @@
 }
 [data-spotlight] {
   background-image: radial-gradient(
-    24rem circle at var(--spot-x, 50%) var(--spot-y, 50%),
-    color-mix(in oklab, var(--color-lime) calc(var(--spot-o) * 22%), transparent),
+    22rem circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    color-mix(in oklab, var(--color-lime) calc(var(--spot-o) * 26%), transparent),
     transparent 70%
   );
   transition-property: --spot-o, background-color, border-color, color, box-shadow, translate, scale;
@@ -327,27 +314,7 @@
   animation: beam-spin 6s linear infinite;
 }
 
-/* Scroll-driven extras (progressive enhancement) */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .text-gradient:not(.marker-sweep) {
-      animation: marker linear both;
-      animation-timeline: view();
-      animation-range: entry 40% cover 45%;
-    }
-    .scroll-rise {
-      animation: rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 35%;
-    }
-    .scroll-zoom {
-      animation: zoom-settle linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 50%;
-    }
-  }
-}
-/* Globe (Who we are) */
+/* Globe (About) */
 @keyframes arc-draw {
   0% { stroke-dashoffset: 1; opacity: 0; }
   10% { opacity: 1; }
@@ -372,9 +339,15 @@
 }
 .globe-orbit { animation: orbit 60s linear infinite; }
 
-@keyframes zoom-settle {
-  from { transform: scale(1.12); }
-  to { transform: scale(1); }
+/* Scroll-driven extras (progressive enhancement) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-rise {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -390,6 +363,8 @@
   .marquee-track,
   .beam-border::after,
   .animate-ping-soft,
+  .animate-card-in,
+  .animate-float-slow,
   .globe-arc,
   .globe-ping,
   .globe-orbit {
@@ -402,7 +377,9 @@
     justify-content: center;
     width: auto;
   }
-  .marquee-track > [aria-hidden="true"] {
+  /* Logo wall: one static row, no duplicate copy */
+  .logo-row:not(:first-child),
+  .logo-row .marquee-track > ul + ul {
     display: none;
   }
 }
