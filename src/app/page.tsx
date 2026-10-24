@@ -74,13 +74,14 @@ export default function Home() {
       <main id="main" className="flex-1">
         <Hero />
         <Clients />
+        {/* Funnel order: offer → proof → why us → how → fit → objections → convert. */}
         <Services />
-        <TechStack />
         <Projects />
-        <Industries />
-        <Process />
-        <About />
         {/* <ClientStories /> */}
+        <About />
+        <Process />
+        <Industries />
+        <TechStack />
         <FAQ />
         <CTA />
       </main>

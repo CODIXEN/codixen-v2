@@ -20,7 +20,9 @@ const COLUMNS = [
       { label: "About", href: "#about" },
       // { label: "Client stories", href: "#stories" }, // hidden until real testimonials
       { label: "Process", href: "#process" },
+      { label: "Tech stack", href: "#stack" },
       { label: "FAQ", href: "#faq" },
+      { label: "Contact", href: "#contact" },
     ],
   },
 ];

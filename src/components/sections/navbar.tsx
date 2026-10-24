@@ -154,6 +154,13 @@ export function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="rounded-xl px-3 py-3 text-base font-medium text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg"
+              >
+                Contact
+              </a>
               <BookCallButton
                 className="mt-2 w-full"
                 onClick={() => setOpen(false)}

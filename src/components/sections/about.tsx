@@ -12,7 +12,7 @@ const POINT_ICONS = [UserRoundCheck, Layers, Zap];
 
 export function About() {
   return (
-    <section id="about" className="relative py-24 md:py-32">
+    <section id="about" className="relative bg-ink-2 py-24 md:py-32">
       <div className="container-cdx">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           {/* Story + points */}
